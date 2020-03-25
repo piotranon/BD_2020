@@ -1,5 +1,4 @@
-## Temat: Baza danych PostgreSQL
-### Projekt bazy danych Biblioteki
+## Projekt bazy danych Biblioteki w PostgreSQL
 #### Autor
 Piotr Długosz 2 rok informatyki labolatoria 1 Uniwersytet Rzeszowski
 #### Założenia

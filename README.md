@@ -1,1 +1,2 @@
-"# BD_2020_DlugoszPiotr" 
+# PLSQL - University Project 
+### Author - Piotr Długosz

@@ -2,7 +2,7 @@
 #### Autor
 Piotr Długosz 2 rok informatyki labolatoria 1 Uniwersytet Rzeszowski
 #### Założenia
-Wykonanie pełnego funkcjonalnego oprogramowania z interfejsem graficznym wykorzystując PostgreSQL.
+Wykonanie pełnego funkcjonalnego oprogramowania z interfejsem graficznym wykorzystując Oracle.
 #### Opis
 Baza przechowuje informację na temat książek, autorów, wydawnictw, klientów, pracowników, wypożyczeń.
 #### Relacje

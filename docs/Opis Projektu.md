@@ -6,7 +6,7 @@ Wykonanie pełnego funkcjonalnego oprogramowania z interfejsem graficznym wykorz
 #### Opis
 Baza przechowuje informację na temat książek, autorów, wydawnictw, klientów, pracowników, wypożyczeń.
 #### Relacje
-Każdy pracownik, klient posiada jeden adres.
+Każdy pracownik, klient posiada jeden adres.   
 Wiele klientów, pracowników może posiadać jeden adres.  
 Każdy pracownik, klient może uczestniczyć w wielu wypożyczeniach.  
 Każda książka może zostać wypożyczona wiele razy.  
@@ -100,4 +100,25 @@ ALTER TABLE ksiazki_tag ADD CONSTRAINT ksiazka_tag2 FOREIGN KEY (id_tagu) REFERE
 
 ALTER TABLE autorzy_ksiazki ADD CONSTRAINT autorzy_ksiazka FOREIGN KEY (id_autora) REFERENCES autorzy (id_autora);
 ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
+```
+#### Sequence - Bazy danych
+```
+Create sequence adres_increment start with 1
+increment by 1;
+Create sequence autorzy_increment start with 1
+increment by 1;
+Create sequence kategorie_increment start with 1
+increment by 1;
+Create sequence klienci_increment start with 1
+increment by 1;
+Create sequence ksiazki_increment start with 1
+increment by 1;
+Create sequence pracownicy_increment start with 1
+increment by 1;
+Create sequence tag_increment start with 1
+increment by 1;
+Create sequence wydawnictwa_increment start with 1
+increment by 1;
+Create sequence wypozyczenia_increment start with 1
+increment by 1;
 ```

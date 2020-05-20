@@ -57,10 +57,7 @@ CREATE TABLE tag (
 CREATE TABLE wydawnictwa (
   id_wydawnictwa int PRIMARY KEY,
   nazwa varchar(255),
-  miejscowosc varchar(255),
-  kod_pocztowy varchar(255),
-  ulica varchar(255),
-  numer_budynku int
+  id_adresu int
 );
 CREATE TABLE autorzy (
   id_autora int PRIMARY KEY,

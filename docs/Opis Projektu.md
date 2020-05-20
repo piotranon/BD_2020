@@ -6,10 +6,11 @@ Wykonanie pełnego funkcjonalnego oprogramowania z interfejsem graficznym wykorz
 #### Opis
 Baza przechowuje informację na temat książek, autorów, wydawnictw, klientów, pracowników, wypożyczeń.
 #### Relacje
-Każdy pracownik, klient posiada jeden adres.  
+Każdy pracownik, klient posiada jeden adres.
+Wiele klientów, pracowników może posiadać jeden adres.  
 Każdy pracownik, klient może uczestniczyć w wielu wypożyczeniach.  
 Każda książka może zostać wypożyczona wiele razy.  
-Każda książka posiada jedno wydawnictwo.  
+Każda książka posiada jedno wydawnictwo, kategorię.  
 Każda książka może zawierać wiele autorów, tagów.  
 #### Schemat ERD
 
@@ -57,7 +58,7 @@ CREATE TABLE tag (
 CREATE TABLE wydawnictwa (
   id_wydawnictwa int PRIMARY KEY,
   nazwa varchar(255),
-  id_adresu int
+  id_adresu int UNIQUE
 );
 CREATE TABLE autorzy (
   id_autora int PRIMARY KEY,
@@ -80,10 +81,11 @@ CREATE TABLE wypozyczenia (
   data_wpozyczenia date,
   data_zwrotu date
 );
-
 ALTER TABLE pracownicy ADD CONSTRAINT pracownik_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
 
 ALTER TABLE klienci ADD CONSTRAINT klient_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
+
+ALTER TABLE wydawnictwa ADD CONSTRAINT wydawnictwo_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
 
 ALTER TABLE wypozyczenia ADD CONSTRAINT wypozyczenia_pracownik FOREIGN KEY (id_pracownika) REFERENCES pracownicy (id_pracownika);
 ALTER TABLE wypozyczenia ADD CONSTRAINT wypozyczenia_klient FOREIGN KEY (id_klienta) REFERENCES klienci (id_klienta);

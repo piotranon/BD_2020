@@ -1,36 +1,35 @@
-package org.example;
-
+import controllers.login;
 import entity.Adres;
 import entity.Autorzy;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-public class MainApp extends Application {
+public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        Adres adres= new Adres();
-        adres.setMiejscowosc("Rzeszów");
-        adres.setUlica("Dębicka2");
-        adres.setNumer_Budynku(2);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/login.fxml"));
+        Parent root = loader.load();
 
-        Autorzy autor =new Autorzy();
+        login controller = (login) loader.getController();
+        stage.setTitle("BD 2020 Długosz Piotr");
+        stage.setScene(new Scene(root));
+        stage.show();
 
-        autor.setImie("Piotr");
-        autor.setNazwisko("Długiosz");
-
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(adres);
-        session.getTransaction().commit();
+//        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        session.getTransaction().commit();
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 //

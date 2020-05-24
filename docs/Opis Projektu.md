@@ -50,7 +50,6 @@ CREATE TABLE ksiazki (
   ilosc int,
   id_wydawnictwa int,
   id_kategorii int,
-  id_autora int
 );
 CREATE TABLE ksiazki_tag (
   id_ksiazki int,

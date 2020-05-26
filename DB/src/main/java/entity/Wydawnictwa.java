@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public class Wydawnictwa {
     @Id
     @GeneratedValue (generator = "wydawnictwa_increment")
-    private int id_wydawnictwa;
+    private BigDecimal id_wydawnictwa;
     private String nazwa;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -24,11 +25,11 @@ public class Wydawnictwa {
     public Wydawnictwa() {
     }
 
-    public int getId_wydawnictwa() {
+    public BigDecimal getId_wydawnictwa() {
         return id_wydawnictwa;
     }
 
-    public void setId_wydawnictwa(int id_wydawnictwa) {
+    public void setId_wydawnictwa(BigDecimal id_wydawnictwa) {
         this.id_wydawnictwa = id_wydawnictwa;
     }
 

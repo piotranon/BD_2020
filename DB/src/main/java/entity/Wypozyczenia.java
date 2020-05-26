@@ -1,15 +1,22 @@
 package entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
+@NamedStoredProcedureQuery(
+        name = "getWypozyczenie",
+        procedureName = "getWypozyczenie",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN,type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class)
+        }
+)
 @Entity
 public class Wypozyczenia {
     @Id
     @GeneratedValue (generator = "wypozyczenia_increment")
-    private int id_wypozyczenia;
+    private BigDecimal id_wypozyczenia;
 
     @ManyToOne
     @JoinColumn(name="id_ksiazki",referencedColumnName = "id_ksiazki",nullable = false)
@@ -29,11 +36,11 @@ public class Wypozyczenia {
     public Wypozyczenia() {
     }
 
-    public int getId_wypozyczenia() {
+    public BigDecimal getId_wypozyczenia() {
         return id_wypozyczenia;
     }
 
-    public void setId_wypozyczenia(int id_wypozyczenia) {
+    public void setId_wypozyczenia(BigDecimal id_wypozyczenia) {
         this.id_wypozyczenia = id_wypozyczenia;
     }
 

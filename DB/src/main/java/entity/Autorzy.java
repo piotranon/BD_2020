@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public class Autorzy {
     @Id
     @GeneratedValue (generator = "autorzy_increment")
-    private int id_autora;
+    private BigDecimal id_autora;
 
     private String imie;
     private String nazwisko;
@@ -24,11 +25,11 @@ public class Autorzy {
     public Autorzy() {
     }
 
-    public int getId_autora() {
+    public BigDecimal getId_autora() {
         return id_autora;
     }
 
-    public void setId_autora(int id_autora) {
+    public void setId_autora(BigDecimal id_autora) {
         this.id_autora = id_autora;
     }
 

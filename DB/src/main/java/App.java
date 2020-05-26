@@ -1,6 +1,6 @@
+import controllers.dbSession;
 import controllers.login;
-import entity.Adres;
-import entity.Autorzy;
+import entity.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 
@@ -12,24 +12,70 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 
 public class App extends Application {
 
+    public static dbSession sesja=new dbSession();
     @Override
     public void start(Stage stage) throws Exception {
 
+        //polaczenie z baza
+        sesja.sessionStart();
+
+        //javafx view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/login.fxml"));
         Parent root = loader.load();
-
         login controller = (login) loader.getController();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));
         stage.show();
 
-//        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-//        Session session = sessionFactory.openSession();
+//        Adres adres=new Adres();
+//        adres.setKod_Pocztowy("35-213");
+//        adres.setMiejscowosc("Rzeszów");
+//        adres.setNumer_Budynku(402);
+//        adres.setUlica("Dębicka");
+//
+//        Wydawnictwa wydawnictwa=new Wydawnictwa();
+//        wydawnictwa.setNazwa("Abilion");
+//        wydawnictwa.setAdres(adres);
+//
+//        Kategorie kategorie=new Kategorie();
+//        kategorie.setNazwa("Poezja");
+//
+//        Autorzy autorzy=new Autorzy();
+//        autorzy.setImie("Joanna");
+//        autorzy.setNazwisko("Turczyn");
+//
+//        Ksiazki ksiazki=new Ksiazki();
+//        ksiazki.setData_wydania(new Date());
+//        ksiazki.setIlosc(5);
+//        ksiazki.setKategoria(kategorie);
+//        ksiazki.setAutorzy(Arrays.asList(autorzy));
+//        ksiazki.setTytul("Kwiat zakazanego drzewa");
+//        ksiazki.setWydawnictwo(wydawnictwa);
+
+//        Pracownicy pracownicy=new Pracownicy();
+//        pracownicy.setAdres(adres);
+//        pracownicy.setData_urodzenia(new Date());
+//        pracownicy.setImie("admin");
+//        pracownicy.setNazwisko("admin");
+//        pracownicy.setHaslo("admin");
+//        pracownicy.setLogin("admin");
+//        pracownicy.setPesel("XDPESEL");
+
+//        SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+//        Session session=sessionFactory.openSession();
 //        session.beginTransaction();
+//        session.save(pracownicy);
 //        session.getTransaction().commit();
+//        session.close();
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 //

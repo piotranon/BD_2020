@@ -1,29 +1,33 @@
 package entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+@NamedStoredProcedureQuery(
+        name = "GETALLKSIAZKI",
+        procedureName = "GETALLKSIAZKI"
+)
 @Entity
 public class Ksiazki {
     @Id
     @GeneratedValue (generator = "ksiazki_increment")
-    private int id_ksiazki;
+    private BigDecimal id_ksiazki;
     private String tytul;
     private Date data_wydania;
-    private int ilosc;
+    private BigDecimal ilosc;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_wydawnictwa",nullable = false)
     private Wydawnictwa wydawnictwo;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_kategorii",nullable = false)
     private Kategorie kategoria;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name="autorzy_ksiazki",
             joinColumns = {@JoinColumn(name = "id_ksiazki")},
@@ -31,7 +35,7 @@ public class Ksiazki {
     )
     private List<Autorzy> autorzy=new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name="ksiazki_tag",
             joinColumns = {@JoinColumn(name = "id_ksiazki")},
@@ -49,11 +53,11 @@ public class Ksiazki {
     public Ksiazki() {
     }
 
-    public int getId_ksiazki() {
+    public BigDecimal getId_ksiazki() {
         return id_ksiazki;
     }
 
-    public void setId_ksiazki(int id_ksiazki) {
+    public void setId_ksiazki(BigDecimal id_ksiazki) {
         this.id_ksiazki = id_ksiazki;
     }
 
@@ -73,11 +77,11 @@ public class Ksiazki {
         this.data_wydania = data_wydania;
     }
 
-    public int getIlosc() {
+    public BigDecimal getIlosc() {
         return ilosc;
     }
 
-    public void setIlosc(int ilosc) {
+    public void setIlosc(BigDecimal ilosc) {
         this.ilosc = ilosc;
     }
 

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public class Tag {
     @Id
     @GeneratedValue (generator = "tag_increment")
-    private int id_tagu;
+    private BigDecimal id_tagu;
     private String nazwa;
 
     @ManyToMany
@@ -22,11 +23,11 @@ public class Tag {
     public Tag() {
     }
 
-    public int getId_tagu() {
+    public BigDecimal getId_tagu() {
         return id_tagu;
     }
 
-    public void setId_tagu(int id_tagu) {
+    public void setId_tagu(BigDecimal id_tagu) {
         this.id_tagu = id_tagu;
     }
 

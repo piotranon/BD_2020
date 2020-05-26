@@ -28,7 +28,9 @@ CREATE TABLE pracownicy (
   nazwisko varchar(255),
   pesel varchar(255),
   data_urodzenia date,
-  id_adresu int
+  id_adresu int,
+  login varchar(255),
+  haslo varchar(255)
 );
 CREATE TABLE klienci (
   id_klienta int PRIMARY KEY,

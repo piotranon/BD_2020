@@ -1,18 +1,24 @@
 package entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@NamedStoredProcedureQuery(
+        name = "GETADRES",
+        procedureName = "GETADRES"
+)
 @Entity
 public class Adres {
     @Id
     @GeneratedValue (generator = "ADRES_INCREMENT")
-    private int id_adresu;
+    private BigDecimal id_adresu;
     private String miejscowosc;
     private String kod_Pocztowy;
     private String ulica;
-    private int numer_Budynku;
+    private BigDecimal numer_Budynku;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -32,11 +38,11 @@ public class Adres {
     public Adres() {
     }
 
-    public int getId_adresu() {
+    public BigDecimal getId_adresu() {
         return id_adresu;
     }
 
-    public void setId_adresu(int id_adresu) {
+    public void setId_adresu(BigDecimal id_adresu) {
         this.id_adresu = id_adresu;
     }
 
@@ -64,11 +70,11 @@ public class Adres {
         this.ulica = ulica;
     }
 
-    public int getNumer_Budynku() {
+    public BigDecimal getNumer_Budynku() {
         return numer_Budynku;
     }
 
-    public void setNumer_Budynku(int numer_Budynku) {
+    public void setNumer_Budynku(BigDecimal numer_Budynku) {
         this.numer_Budynku = numer_Budynku;
     }
 
@@ -94,19 +100,5 @@ public class Adres {
 
     public void setWydawnictwo(Wydawnictwa wydawnictwo) {
         this.wydawnictwo = wydawnictwo;
-    }
-
-    @Override
-    public String toString() {
-        return "Adres{" +
-                "id_adresu=" + id_adresu +
-                ", miejscowosc='" + miejscowosc + '\'' +
-                ", kod_Pocztowy='" + kod_Pocztowy + '\'' +
-                ", ulica='" + ulica + '\'' +
-                ", numer_Budynku=" + numer_Budynku +
-                ", pracownicy=" + pracownicy +
-                ", klienci=" + klienci +
-                ", wydawnictwo=" + wydawnictwo +
-                '}';
     }
 }

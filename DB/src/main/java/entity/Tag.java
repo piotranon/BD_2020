@@ -9,7 +9,7 @@ import java.util.List;
 public class Tag {
     @Id
     @GeneratedValue (generator = "tag_increment")
-    private BigDecimal id_tagu;
+    private int id_tagu;
     private String nazwa;
 
     @ManyToMany
@@ -23,11 +23,11 @@ public class Tag {
     public Tag() {
     }
 
-    public BigDecimal getId_tagu() {
+    public int getId_tagu() {
         return id_tagu;
     }
 
-    public void setId_tagu(BigDecimal id_tagu) {
+    public void setId_tagu(int id_tagu) {
         this.id_tagu = id_tagu;
     }
 

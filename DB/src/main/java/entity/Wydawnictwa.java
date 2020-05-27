@@ -9,7 +9,7 @@ import java.util.List;
 public class Wydawnictwa {
     @Id
     @GeneratedValue (generator = "wydawnictwa_increment")
-    private BigDecimal id_wydawnictwa;
+    private int id_wydawnictwa;
     private String nazwa;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -25,11 +25,11 @@ public class Wydawnictwa {
     public Wydawnictwa() {
     }
 
-    public BigDecimal getId_wydawnictwa() {
+    public int getId_wydawnictwa() {
         return id_wydawnictwa;
     }
 
-    public void setId_wydawnictwa(BigDecimal id_wydawnictwa) {
+    public void setId_wydawnictwa(int id_wydawnictwa) {
         this.id_wydawnictwa = id_wydawnictwa;
     }
 

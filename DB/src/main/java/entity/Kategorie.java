@@ -9,7 +9,7 @@ import java.util.List;
 public class Kategorie {
     @Id
     @GeneratedValue (generator = "kategorie_increment")
-    private BigDecimal id_kategorii;
+    private int id_kategorii;
     private String nazwa;
 
     @OneToMany(
@@ -21,11 +21,11 @@ public class Kategorie {
     public Kategorie() {
     }
 
-    public BigDecimal getId_kategorii() {
+    public int getId_kategorii() {
         return id_kategorii;
     }
 
-    public void setId_kategorii(BigDecimal id_kategorii) {
+    public void setId_kategorii(int id_kategorii) {
         this.id_kategorii = id_kategorii;
     }
 

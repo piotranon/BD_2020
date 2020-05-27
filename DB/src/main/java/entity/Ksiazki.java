@@ -14,10 +14,10 @@ import java.util.List;
 public class Ksiazki {
     @Id
     @GeneratedValue (generator = "ksiazki_increment")
-    private BigDecimal id_ksiazki;
+    private int id_ksiazki;
     private String tytul;
     private Date data_wydania;
-    private BigDecimal ilosc;
+    private int ilosc;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="id_wydawnictwa",nullable = false)
@@ -53,11 +53,11 @@ public class Ksiazki {
     public Ksiazki() {
     }
 
-    public BigDecimal getId_ksiazki() {
+    public int getId_ksiazki() {
         return id_ksiazki;
     }
 
-    public void setId_ksiazki(BigDecimal id_ksiazki) {
+    public void setId_ksiazki(int id_ksiazki) {
         this.id_ksiazki = id_ksiazki;
     }
 
@@ -77,11 +77,11 @@ public class Ksiazki {
         this.data_wydania = data_wydania;
     }
 
-    public BigDecimal getIlosc() {
+    public int getIlosc() {
         return ilosc;
     }
 
-    public void setIlosc(BigDecimal ilosc) {
+    public void setIlosc(int ilosc) {
         this.ilosc = ilosc;
     }
 

@@ -16,7 +16,7 @@ import java.util.Date;
 public class Wypozyczenia {
     @Id
     @GeneratedValue (generator = "wypozyczenia_increment")
-    private BigDecimal id_wypozyczenia;
+    private int id_wypozyczenia;
 
     @ManyToOne
     @JoinColumn(name="id_ksiazki",referencedColumnName = "id_ksiazki",nullable = false)
@@ -36,11 +36,11 @@ public class Wypozyczenia {
     public Wypozyczenia() {
     }
 
-    public BigDecimal getId_wypozyczenia() {
+    public int getId_wypozyczenia() {
         return id_wypozyczenia;
     }
 
-    public void setId_wypozyczenia(BigDecimal id_wypozyczenia) {
+    public void setId_wypozyczenia(int id_wypozyczenia) {
         this.id_wypozyczenia = id_wypozyczenia;
     }
 

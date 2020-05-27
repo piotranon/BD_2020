@@ -26,7 +26,7 @@ import java.util.List;
 public class Pracownicy {
     @Id
     @GeneratedValue (generator = "pracownicy_increment")
-    private BigDecimal id_pracownika;
+    private int id_pracownika;
     private String imie;
     private String nazwisko;
     private String pesel;
@@ -47,11 +47,11 @@ public class Pracownicy {
     public Pracownicy() {
     }
 
-    public BigDecimal getId_pracownika() {
+    public int getId_pracownika() {
         return id_pracownika;
     }
 
-    public void setId_pracownika(BigDecimal id_pracownika) {
+    public void setId_pracownika(int id_pracownika) {
         this.id_pracownika = id_pracownika;
     }
 
@@ -129,7 +129,7 @@ public class Pracownicy {
                 ", data_urodzenia=" + data_urodzenia +
                 ", login='" + login + '\'' +
                 ", haslo='" + haslo + '\'' +
-                ", adres=" + adres.toString() +
+                ", adres=" + adres +
                 '}';
     }
 }

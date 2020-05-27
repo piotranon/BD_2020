@@ -9,7 +9,7 @@ import java.util.List;
 public class Autorzy {
     @Id
     @GeneratedValue (generator = "autorzy_increment")
-    private BigDecimal id_autora;
+    private int id_autora;
 
     private String imie;
     private String nazwisko;
@@ -25,11 +25,11 @@ public class Autorzy {
     public Autorzy() {
     }
 
-    public BigDecimal getId_autora() {
+    public int getId_autora() {
         return id_autora;
     }
 
-    public void setId_autora(BigDecimal id_autora) {
+    public void setId_autora(int id_autora) {
         this.id_autora = id_autora;
     }
 

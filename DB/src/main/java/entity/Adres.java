@@ -14,11 +14,11 @@ import java.util.List;
 public class Adres {
     @Id
     @GeneratedValue (generator = "ADRES_INCREMENT")
-    private BigDecimal id_adresu;
+    private int id_adresu;
     private String miejscowosc;
     private String kod_Pocztowy;
     private String ulica;
-    private BigDecimal numer_Budynku;
+    private int numer_Budynku;
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -38,11 +38,11 @@ public class Adres {
     public Adres() {
     }
 
-    public BigDecimal getId_adresu() {
+    public int getId_adresu() {
         return id_adresu;
     }
 
-    public void setId_adresu(BigDecimal id_adresu) {
+    public void setId_adresu(int id_adresu) {
         this.id_adresu = id_adresu;
     }
 
@@ -70,11 +70,11 @@ public class Adres {
         this.ulica = ulica;
     }
 
-    public BigDecimal getNumer_Budynku() {
+    public int getNumer_Budynku() {
         return numer_Budynku;
     }
 
-    public void setNumer_Budynku(BigDecimal numer_Budynku) {
+    public void setNumer_Budynku(int numer_Budynku) {
         this.numer_Budynku = numer_Budynku;
     }
 
@@ -100,5 +100,19 @@ public class Adres {
 
     public void setWydawnictwo(Wydawnictwa wydawnictwo) {
         this.wydawnictwo = wydawnictwo;
+    }
+
+    @Override
+    public String toString() {
+        return "Adres{" +
+                "id_adresu=" + id_adresu +
+                ", miejscowosc='" + miejscowosc + '\'' +
+                ", kod_Pocztowy='" + kod_Pocztowy + '\'' +
+                ", ulica='" + ulica + '\'' +
+                ", numer_Budynku=" + numer_Budynku +
+                ", pracownicy=" + pracownicy +
+                ", klienci=" + klienci +
+                ", wydawnictwo=" + wydawnictwo +
+                '}';
     }
 }

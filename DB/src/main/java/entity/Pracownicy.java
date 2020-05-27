@@ -8,19 +8,6 @@ import java.util.List;
 @NamedStoredProcedureQuery(
         name = "GETPRACOWNIK",
         procedureName = "GETPRACOWNIK"
-//        ,
-//        parameters = {
-//                @StoredProcedureParameter(
-//                        mode = ParameterMode.IN,
-//                        type = String.class,
-//                        name = "login"
-//                ),
-//                @StoredProcedureParameter(
-//                        mode = ParameterMode.IN,
-//                        type = String.class,
-//                        name = "haslo"
-//                )
-//        }
 )
 @Entity
 public class Pracownicy {

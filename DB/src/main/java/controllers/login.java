@@ -4,31 +4,33 @@ package controllers;
  * Sample Skeleton for 'login.fxml' Controller Class
  */
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.URL;
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.*;
-
 import entity.Adres;
-import entity.Ksiazki;
 import entity.Pracownicy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.hibernate.Session;
+import javafx.stage.Stage;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.result.Output;
 import org.hibernate.result.ResultSetOutput;
 
-import javax.persistence.*;
+import javax.persistence.ParameterMode;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class login {
 
-    public Pracownicy zalogowany=new Pracownicy();
+    public Stage stage;
+    public static Pracownicy zalogowany=new Pracownicy();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -53,7 +55,7 @@ public class login {
     }
 
     @FXML
-    void loginToSystem(ActionEvent event) {
+    void loginToSystem(ActionEvent event) throws IOException {
         error.setText("");
 
 
@@ -141,10 +143,39 @@ public class login {
                 }
                 zalogowany.setAdres(adres);
 
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/customers.fxml"));
+//                Parent root = loader.load();
+//                Stage stage = new Stage();
+//                scene
+//                customers controller=(customers) loader.getController();
+//                stage.setTitle("JavaFX Hibernate");
+//
+//                stage.setScene(new Scene(root));
+//                stage.show();
+
+//                Stage stag = (Stage) cancel.getScene().getWindow();
+//                stag.close();
+
+
                 System.out.println("ZALOGOWANO: "+zalogowany.toString());
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/menu.fxml"));
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                menu controller = (menu) loader.getController();
+                controller.stage=stage;
+                stage.setTitle("BD 2020 Długosz Piotr");
+                stage.setScene(new Scene(root));
+                stage.show();
+
             }else
             {
                 error.setText("NIE POPRAWNE DANE LOGOWANIA");
+                System.out.println("Błąd logowania");
             }
 
         }

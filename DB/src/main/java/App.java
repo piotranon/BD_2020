@@ -1,5 +1,6 @@
 import controllers.dbSession;
 import controllers.login;
+import controllers.stageRender;
 import entity.*;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -28,13 +29,9 @@ public class App extends Application {
         //polaczenie z baza
         sesja.sessionStart();
 
+        stageRender.renderlogin();
+
         //javafx view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/login.fxml"));
-        Parent root = loader.load();
-        login controller = (login) loader.getController();
-        stage.setTitle("BD 2020 Długosz Piotr");
-        stage.setScene(new Scene(root));
-        stage.show();
 
 //        Adres adres=new Adres();
 //        adres.setKod_Pocztowy("35-213");

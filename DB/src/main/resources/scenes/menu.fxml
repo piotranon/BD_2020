@@ -5,19 +5,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.login">
-   <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.menu">
+   <center>
+      <VBox alignment="CENTER" prefHeight="235.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label contentDisplay="CENTER" prefHeight="58.0" prefWidth="391.0" text="Menu" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+            <Label contentDisplay="CENTER" prefHeight="58.0" prefWidth="80.0" text="Menu" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="31.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Label>
+            <Button mnemonicParsing="false" onAction="#zwrot" text="Zwrot" textAlignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#ksiazki" text="Książki" textAlignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#wyloguj" text="Wyloguj" textAlignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="60.0" />
+               </VBox.margin>
+            </Button>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
-   </children>
-</Pane>
+   </center>
+</BorderPane>

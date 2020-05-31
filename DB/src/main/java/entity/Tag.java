@@ -23,6 +23,11 @@ public class Tag {
     public Tag() {
     }
 
+    public Tag(int id_tagu,String nazwa) {
+        this.id_tagu = id_tagu;
+        this.nazwa = nazwa;
+    }
+
     public int getId_tagu() {
         return id_tagu;
     }
@@ -52,7 +57,6 @@ public class Tag {
         return "Tag{" +
                 "id_tagu=" + id_tagu +
                 ", nazwa='" + nazwa + '\'' +
-                ", ksiazki=" + ksiazki +
                 '}';
     }
 }

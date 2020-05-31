@@ -1,5 +1,5 @@
 ###Dokumentacja Projektu
-1. Spis treści
+1. **Spis treści**
 
    - [Dokumentacja procedur]()
        1. [GETPRACOWNIK]()
@@ -8,7 +8,7 @@
        1. [Panel logowania]()
        1. [Menu]()
 
-1. Procedury
+1. **Procedury**
 
    - **GETPRACOWNIK**   
    Procedura zwraca dane pracownika o ile istnieje pracownik z podanym loginem i hasłem.
@@ -32,14 +32,81 @@
                 Where login=d_login AND haslo=d_haslo;
         END;
         ```
-  
-1. Widoki
+    - **GETKSIAZKI**
+    Procedura zwraca wszyskie książki.
+        ```sql
+        create or replace NONEDITIONABLE PROCEDURE "GETKSIAZKI" 
+        (books OUT SYS_REFCURSOR)
+        AS
+        BEGIN
+            OPEN books FOR
+                Select 
+                    *
+                from ksiazki;
+        END;
+        ```
+     - **GETWYPOZYCZENIAILOSC**
+     Zwraca ilość wypożyczeń książek, wykorzystywane w widoku [książki]() jako popularność książki.
+     ```sql
+       create or replace NONEDITIONABLE PROCEDURE "GETWYPOZYCZENIAILOSC" 
+       (id_ksiazki IN NUMBER,ilosc OUT NUMBER)
+       AS
+       BEGIN
+           Select
+               count(id_ksiazki)
+           into
+               ilosc
+           from 
+               wypozyczenia;
+       END;
+     ```
+    - **GETWYDAWNICTWA**   
+    Procedura zwraca wszystkie wydawnictwa przy dodawaniu [nowej książki]().
+     ```sql
+       create or replace NONEDITIONABLE PROCEDURE "GETWYDAWNICTWA" 
+       (wydawnictwaData OUT SYS_REFCURSOR)
+       AS
+       BEGIN
+           OPEN wydawnictwaData FOR
+               Select 
+                   *
+               from wydawnictwa;
+       END;
+    ```
+   - **GETTAGI**   
+   Procedura zwraca wszystkie tagi wykorzystane przy dodawaniu [nowej książki]().
+     ```sql
+       create or replace NONEDITIONABLE PROCEDURE "GETTAGI" 
+       (tagiData OUT SYS_REFCURSOR)
+       AS
+       BEGIN
+           OPEN tagiData FOR
+               Select 
+                   *
+               from tag;
+       END;
+     ```
+   - **INSERTTAG**  
+   Procedura wstawia tag do tabeli
+     ```sql
+        create or replace NONEDITIONABLE PROCEDURE "INSERTTAG" 
+        (nazwaTagu IN VARCHAR2)
+        AS
+        BEGIN
+            INSERT INTO tag (id_tagu,nazwa)
+            VALUES (TAG_INCREMENT.nextval,nazwatagu);
+            commit;
+        END;
+     ```
+1. **Widoki**
    - **Panel logowania**  
     Wykorzystuję procedurę ["GETPRACOWNIK"](). Dane pracownika zapisuje do pamięci.  
     
         ![Wygląd panelu logowania](./login.png)
     
    - **Menu**   
-    Zawiera przyciski do korzystania z różnych funckjonalności projektu. 
+    Zawiera przyciski do korzystania z różnych funkcjonalności projektu. 
       
         ![Wyglad_menu](./menu.png)
+        
+   - **Menu**

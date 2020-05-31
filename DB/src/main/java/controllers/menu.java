@@ -7,14 +7,10 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 import entity.Pracownicy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class menu {
@@ -29,14 +25,12 @@ public class menu {
 
     @FXML
     void ksiazki(ActionEvent event) {
-
+        render.books();
     }
 
     @FXML
-    void wyloguj(ActionEvent event) {
-        login.zalogowany=new Pracownicy();
-
-
+    void wyloguj(ActionEvent event) throws IOException {
+        render.login();
     }
 
     @FXML

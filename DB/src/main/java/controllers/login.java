@@ -98,7 +98,16 @@ public class login {
 
 //
 //
+
+//        ProcedureCall call2 = dbSession.session.createStoredProcedureCall("GETPRACOWNIK2",Pracownicy.class);
+//        call2.registerParameter(1,String.class,ParameterMode.IN).bindValue(login.getText());
+//        call2.registerParameter(2,String.class,ParameterMode.IN).bindValue(haslo.getText());
+//        call2.registerParameter(3, Class.class,ParameterMode.INOUT);
 //
+//        Pracownicy xd = (Pracownicy)call2.getOutputs().getOutputParameterValue(3);
+//        System.out.println(xd.toString());
+//
+
 
         ProcedureCall call = dbSession.session.createStoredProcedureCall("GETPRACOWNIK");
         call.registerParameter(1,String.class,ParameterMode.IN).bindValue(login.getText());
@@ -107,10 +116,14 @@ public class login {
 
         Output output = call.getOutputs().getCurrent();
 
+
+
+
         if (output.isResultSet()) {
             List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
             if(!resultData.isEmpty())
             {
+                zalogowany=new Pracownicy();
                 zalogowany.setId_pracownika(((BigDecimal)resultData.get(0)[0]).intValue());
                 zalogowany.setImie((String)resultData.get(0)[1]);
                 zalogowany.setNazwisko((String)resultData.get(0)[2]);
@@ -142,35 +155,9 @@ public class login {
                     }
                 }
                 zalogowany.setAdres(adres);
-
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/customers.fxml"));
-//                Parent root = loader.load();
-//                Stage stage = new Stage();
-//                scene
-//                customers controller=(customers) loader.getController();
-//                stage.setTitle("JavaFX Hibernate");
-//
-//                stage.setScene(new Scene(root));
-//                stage.show();
-
-//                Stage stag = (Stage) cancel.getScene().getWindow();
-//                stag.close();
-
-
                 System.out.println("ZALOGOWANO: "+zalogowany.toString());
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/scenes/menu.fxml"));
-                Parent root = null;
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                menu controller = (menu) loader.getController();
-                controller.stage=stage;
-                stage.setTitle("BD 2020 Długosz Piotr");
-                stage.setScene(new Scene(root));
-                stage.show();
+                render.menu();
 
             }else
             {
@@ -334,7 +321,8 @@ public class login {
         assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'login.fxml'.";
         assert haslo != null : "fx:id=\"hasło\" was not injected: check your FXML file 'login.fxml'.";
         assert error != null : "fx:id=\"error\" was not injected: check your FXML file 'login.fxml'.";
-
+        zalogowany=new Pracownicy();
+        System.out.println("rerender");
     }
 
 }

@@ -63,7 +63,6 @@ public class Wydawnictwa {
                 "id_wydawnictwa=" + id_wydawnictwa +
                 ", nazwa='" + nazwa + '\'' +
                 ", adres=" + adres +
-                ", ksiazki=" + ksiazki +
                 '}';
     }
 }

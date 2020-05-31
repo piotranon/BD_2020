@@ -53,6 +53,55 @@ public class Ksiazki {
     public Ksiazki() {
     }
 
+    public Ksiazki(Ksiazki ksiazka) {
+        this.id_ksiazki=ksiazka.getId_ksiazki();
+        this.tytul=ksiazka.getTytul();
+        this.data_wydania=ksiazka.getData_wydania();
+        this.ilosc=ksiazka.getIlosc();
+        this.wydawnictwo=ksiazka.getWydawnictwo();
+        this.kategoria=ksiazka.getKategoria();
+        this.autorzy=ksiazka.getAutorzy();
+        this.tags=ksiazka.getTags();
+    }
+
+    public String getWydawnictwoName()
+    {
+        return wydawnictwo.getNazwa();
+    }
+
+    public String getKategoriaName()
+    {
+        return kategoria.getNazwa();
+    }
+
+    public String getTagsWithHash()
+    {
+        StringBuilder xd = new StringBuilder("");
+        for(int i=0;i<tags.size();i++)
+        {
+            xd.append("#"+tags.get(i)+" ");
+        }
+        return xd.toString();
+    }
+
+    public String getAutorzyNames()
+    {
+        StringBuilder xd = new StringBuilder("");
+        for(int i=0;i<autorzy.size();i++)
+        {
+            xd.append(autorzy.get(i).getImie()+" "+autorzy.get(i).getNazwisko().substring(0,1)+". ,");
+        }
+        if(xd.length()>1)
+            xd.deleteCharAt(xd.length()-1);
+        return xd.toString();
+    }
+
+
+    public int getPopularnosc()
+    {
+        return wypozyczenia.size();
+    }
+
     public int getId_ksiazki() {
         return id_ksiazki;
     }

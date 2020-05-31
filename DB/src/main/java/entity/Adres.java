@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @NamedStoredProcedureQuery(
         name = "GETADRES",
         procedureName = "GETADRES"
@@ -110,9 +109,6 @@ public class Adres {
                 ", kod_Pocztowy='" + kod_Pocztowy + '\'' +
                 ", ulica='" + ulica + '\'' +
                 ", numer_Budynku=" + numer_Budynku +
-                ", pracownicy=" + pracownicy +
-                ", klienci=" + klienci +
-                ", wydawnictwo=" + wydawnictwo +
                 '}';
     }
 }

@@ -50,7 +50,6 @@ public class Kategorie {
         return "Kategorie{" +
                 "id_kategorii=" + id_kategorii +
                 ", nazwa='" + nazwa + '\'' +
-                ", ksiazki=" + ksiazki +
                 '}';
     }
 }

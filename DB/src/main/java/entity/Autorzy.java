@@ -63,7 +63,6 @@ public class Autorzy {
                 "id_autora=" + id_autora +
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
-                ", ksiazki=" + ksiazki +
                 '}';
     }
 }

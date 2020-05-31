@@ -1,23 +1,9 @@
 import controllers.dbSession;
-import controllers.login;
-import controllers.stageRender;
-import entity.*;
+import controllers.render;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 
 public class App extends Application {
@@ -28,8 +14,8 @@ public class App extends Application {
 
         //polaczenie z baza
         sesja.sessionStart();
-
-        stageRender.renderlogin();
+        render.stage=stage;
+        render.login();
 
         //javafx view
 

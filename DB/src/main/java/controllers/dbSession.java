@@ -4,6 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
+
 public class dbSession {
     public static SessionFactory sessionFactory=null;
     public static Session session=null;
@@ -19,27 +23,12 @@ public class dbSession {
             System.out.println("sesja juz istnieje");
     }
 
-    public void sessionClose(){
-        sessionFactory.close();
-        sessionFactory=null;
-        session=null;
-        System.out.println("sesja zakonczona");
-    }
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
+    public static <T> List<T> loadAllData(Class<T> type) {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(type);
+        criteria.from(type);
+        List<T> data = session.createQuery(criteria).getResultList();
+        return data;
     }
 
     @Override

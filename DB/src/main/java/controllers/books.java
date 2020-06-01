@@ -8,8 +8,6 @@ package controllers;
         import java.util.function.Predicate;
 
         import entity.*;
-        import javafx.beans.property.SimpleStringProperty;
-        import javafx.beans.value.ObservableValue;
         import javafx.collections.FXCollections;
         import javafx.collections.ObservableList;
         import javafx.collections.transformation.FilteredList;
@@ -19,13 +17,14 @@ package controllers;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
+        import javafx.scene.control.Button;
         import javafx.scene.control.TableColumn;
         import javafx.scene.control.TableView;
         import javafx.scene.control.TextField;
         import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.input.KeyEvent;
+        import javafx.stage.Modality;
         import javafx.stage.Stage;
-        import javafx.util.Callback;
 
 public class books {
 
@@ -62,6 +61,9 @@ public class books {
     @FXML // fx:id="join_date2"
     private TableColumn<?, ?> popularnosc; // Value injected by FXMLLoader
 
+    @FXML
+    private Button button;
+
     private List<Ksiazki> localBooksList=new ArrayList<>();
     @FXML
     void bookDetails(ActionEvent event) {
@@ -80,8 +82,11 @@ public class books {
         addBook controller = (addBook) loader.getController();
         Stage stage = new Stage();
         stage.setTitle("BD 2020 Długosz Piotr");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(button.getScene().getWindow());
         stage.setScene(new Scene(root));
-        stage.show();
+        stage.showAndWait();
+        reload();
     }
 
     @FXML
@@ -149,7 +154,7 @@ public class books {
     }
 
     public void reload(){
-        localBooksList=dbSession.loadAllData(Ksiazki.class);
+        localBooksList= db.loadAllData(Ksiazki.class);
         search.setText("");
         sortedList(localBooksList);
 

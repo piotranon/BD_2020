@@ -1,4 +1,4 @@
-import controllers.dbSession;
+import controllers.db;
 import controllers.render;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    public static dbSession sesja=new dbSession();
+    public static db sesja=new db();
     @Override
     public void start(Stage stage) throws Exception {
 

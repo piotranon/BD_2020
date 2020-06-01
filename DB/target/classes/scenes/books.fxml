@@ -44,7 +44,7 @@
                </GridPane.margin>
             </TextField>
             <Label style="-fx-font-weight: bold;" text="Wyszukiwarka" />
-            <Button mnemonicParsing="false" onAction="#bookNew" style="-fx-background-color: #5AFF1C; -fx-border-style: solid; -fx-border-radius: 10; -fx-background-radius: 10;" text="Nowa Książka" GridPane.rowIndex="4">
+            <Button fx:id="button" mnemonicParsing="false" onAction="#bookNew" style="-fx-background-color: #5AFF1C; -fx-border-style: solid; -fx-border-radius: 10; -fx-background-radius: 10;" text="Nowa Książka" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>

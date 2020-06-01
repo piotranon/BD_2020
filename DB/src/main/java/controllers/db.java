@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class dbSession {
+public class db {
     public static SessionFactory sessionFactory=null;
     public static Session session=null;
 

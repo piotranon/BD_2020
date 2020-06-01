@@ -32,7 +32,7 @@
                 Where login=d_login AND haslo=d_haslo;
         END;
         ```
-    - **GETKSIAZKI**
+    - **GETKSIAZKI**  
     Procedura zwraca wszyskie książki.
         ```sql
         create or replace NONEDITIONABLE PROCEDURE "GETKSIAZKI" 
@@ -45,8 +45,8 @@
                 from ksiazki;
         END;
         ```
-     - **GETWYPOZYCZENIAILOSC**
-     Zwraca ilość wypożyczeń książek, wykorzystywane w widoku [książki]() jako popularność książki.
+     - **GETWYPOZYCZENIAILOSC**  
+     Zwraca ilość wypożyczeń książek.
      ```sql
        create or replace NONEDITIONABLE PROCEDURE "GETWYPOZYCZENIAILOSC" 
        (id_ksiazki IN NUMBER,ilosc OUT NUMBER)
@@ -61,7 +61,7 @@
        END;
      ```
     - **GETWYDAWNICTWA**   
-    Procedura zwraca wszystkie wydawnictwa przy dodawaniu [nowej książki]().
+    Procedura zwraca wszystkie wydawnictwa.
      ```sql
        create or replace NONEDITIONABLE PROCEDURE "GETWYDAWNICTWA" 
        (wydawnictwaData OUT SYS_REFCURSOR)
@@ -74,7 +74,7 @@
        END;
     ```
    - **GETTAGI**   
-   Procedura zwraca wszystkie tagi wykorzystane przy dodawaniu [nowej książki]().
+   Procedura zwraca wszystkie tagi.
      ```sql
        create or replace NONEDITIONABLE PROCEDURE "GETTAGI" 
        (tagiData OUT SYS_REFCURSOR)
@@ -86,8 +86,21 @@
                from tag;
        END;
      ```
+   - **GETAUTORZY**  
+        Procedura zwraca wszystkich autorów.
+      ```sql
+        create or replace NONEDITIONABLE PROCEDURE "GETAUTORZY" 
+        (autorzyData OUT SYS_REFCURSOR)
+        AS
+        BEGIN
+            OPEN autorzyData FOR
+                Select 
+                    *
+                from autorzy;
+        END;
+      ```
    - **INSERTTAG**  
-   Procedura wstawia tag do tabeli
+        Procedura wstawia tag do tabeli.
      ```sql
         create or replace NONEDITIONABLE PROCEDURE "INSERTTAG" 
         (nazwaTagu IN VARCHAR2)

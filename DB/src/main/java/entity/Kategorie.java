@@ -13,7 +13,7 @@ public class Kategorie {
     private String nazwa;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "kategoria"
     )
     private List<Ksiazki> ksiazki=new ArrayList<>();

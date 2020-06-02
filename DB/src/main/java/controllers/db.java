@@ -12,7 +12,7 @@ public class db {
     public static SessionFactory sessionFactory = null;
     public static Session session = null;
 
-    public void sessionStart() {
+    public static void sessionStart() {
         if (sessionFactory == null) {
             sessionFactory = new Configuration().configure().buildSessionFactory();
             session = sessionFactory.openSession();
@@ -29,7 +29,6 @@ public class db {
         List<T> data = session.createQuery(criteria).getResultList();
         return data;
     }
-
     @Override
     public String toString() {
         return "Session{" +

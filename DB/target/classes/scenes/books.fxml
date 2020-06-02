@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.books">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.books">
    <right>
       <GridPane prefHeight="375.0" prefWidth="197.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -113,15 +113,6 @@
                   <ImageView fitHeight="34.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/logout.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#menu" prefHeight="41.0" prefWidth="67.0" style="-fx-background-color: null;" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <graphic>
-                  <ImageView fitHeight="33.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
                      </image>
                   </ImageView>
                </graphic>

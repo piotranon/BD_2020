@@ -136,11 +136,6 @@ public class books {
     }
 
     @FXML
-    void menu(ActionEvent event) {
-        render.menu();
-    }
-
-    @FXML
     void reloadDataToView(ActionEvent event) {
         reload();
     }
@@ -164,7 +159,7 @@ public class books {
                     return true;
                 else if (c.getAutorzyNames().toLowerCase().contains(search.getText().toLowerCase()))
                     return true;
-                else if (c.getTagsWithHash().toLowerCase().contains(search.getText().toLowerCase()))
+                else if (c.getTagsHash().toLowerCase().contains(search.getText().toLowerCase()))
                     return true;
                 return false;
             }
@@ -180,6 +175,7 @@ public class books {
 
     public void reload() {
         localBooksList = db.loadAllData(Ksiazki.class);
+        System.out.println(localBooksList.toString());
         search.setText("");
         sortedList(localBooksList);
     }
@@ -192,7 +188,7 @@ public class books {
         category.setCellValueFactory(new PropertyValueFactory("KategoriaName"));
         wydawnictwo.setCellValueFactory(new PropertyValueFactory("WydawnictwoName"));
         autorzy.setCellValueFactory(new PropertyValueFactory("AutorzyNames"));
-        tags.setCellValueFactory(new PropertyValueFactory("TagsWithHash"));
+        tags.setCellValueFactory(new PropertyValueFactory("TagsHash"));
         popularnosc.setCellValueFactory(new PropertyValueFactory("Popularnosc"));
 
         reload();

@@ -21,41 +21,19 @@ public class render {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    public static void menu(){
-        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/menu.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        menu controller = (menu) loader.getController();
-        stage.setTitle("BD 2020 Długosz Piotr");
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    public static void booksLogged() {
+    public static void booksLogged() throws IOException {
         FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/books.fxml"));
         Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        root = loader.load();
         books controller = (books) loader.getController();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));
         stage.show();
     }
-    public static void books() {
+    public static void books() throws IOException {
         FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/booksUser.fxml"));
         Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        root = loader.load();
         booksUser controller = (booksUser) loader.getController();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));

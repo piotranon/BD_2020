@@ -18,12 +18,12 @@ public class Pracownicy {
     private String login;
     private String haslo;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name="id_adresu",nullable = false)
     private Adres adres;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "pracownik"
     )
     private List<Wypozyczenia> wypozyczenia=new ArrayList<>();

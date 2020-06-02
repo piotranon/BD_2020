@@ -5,10 +5,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedStoredProcedureQuery(
-        name = "GETADRES",
-        procedureName = "GETADRES"
-)
 @Entity
 public class Adres {
     @Id
@@ -20,13 +16,13 @@ public class Adres {
     private int numer_Budynku;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "adres"
     )
     private List<Pracownicy> pracownicy=new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "adres"
     )
     private List<Klienci> klienci=new ArrayList<>();

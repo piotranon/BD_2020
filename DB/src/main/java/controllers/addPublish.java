@@ -59,7 +59,7 @@ public class addPublish {
             ad.setKod_Pocztowy(kodpocztowy.getText());
             ad.setNumer_Budynku(Integer.valueOf(nrbudynku.getText()));
             wydawnictwa.setAdres(ad);
-            db.session.save(wydawnictwa);
+            db.session.saveOrUpdate(wydawnictwa);
             db.session.getTransaction().commit();
             ((Stage)clearing.getScene().getWindow()).close();
         }else

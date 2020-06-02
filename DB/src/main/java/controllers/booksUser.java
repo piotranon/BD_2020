@@ -144,7 +144,7 @@ public class booksUser {
                     return true;
                 else if (c.getAutorzyNames().toLowerCase().contains(search.getText().toLowerCase()))
                     return true;
-                else if (c.getTagsWithHash().toLowerCase().contains(search.getText().toLowerCase()))
+                else if (c.getTagsHash().toLowerCase().contains(search.getText().toLowerCase()))
                     return true;
                 return false;
             }
@@ -160,6 +160,7 @@ public class booksUser {
 
     public void reload() {
         localBooksList = db.loadAllData(Ksiazki.class);
+        System.out.println("tags: "+localBooksList.get(1).getTagsHash());
         search.setText("");
         sortedList(localBooksList);
     }
@@ -172,7 +173,7 @@ public class booksUser {
         category.setCellValueFactory(new PropertyValueFactory("KategoriaName"));
         wydawnictwo.setCellValueFactory(new PropertyValueFactory("WydawnictwoName"));
         autorzy.setCellValueFactory(new PropertyValueFactory("AutorzyNames"));
-        tags.setCellValueFactory(new PropertyValueFactory("TagsWithHash"));
+        tags.setCellValueFactory(new PropertyValueFactory("TagsHash"));
         popularnosc.setCellValueFactory(new PropertyValueFactory("Popularnosc"));
 
         reload();

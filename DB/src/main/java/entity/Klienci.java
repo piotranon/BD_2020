@@ -18,7 +18,7 @@ public class Klienci {
     private Adres adres;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "klient"
     )
     private List<Wypozyczenia> wypozyczenia=new ArrayList<>();

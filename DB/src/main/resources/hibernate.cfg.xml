@@ -10,7 +10,6 @@
         <property name="dialect">org.hibernate.dialect.Oracle12cDialect</property>
 <!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
         <property name="show_sql">true</property>
-
         <mapping class="entity.Adres"/>
         <mapping class="entity.Autorzy"/>
         <mapping class="entity.Kategorie"/>
@@ -20,8 +19,5 @@
         <mapping class="entity.Tag"/>
         <mapping class="entity.Wydawnictwa"/>
         <mapping class="entity.Wypozyczenia"/>
-
-
-
     </session-factory>
 </hibernate-configuration>

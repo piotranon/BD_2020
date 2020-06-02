@@ -12,12 +12,12 @@ public class Wydawnictwa {
     private int id_wydawnictwa;
     private String nazwa;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_adresu")
     private Adres adres;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             mappedBy = "wydawnictwo"
     )
     private List<Ksiazki> ksiazki=new ArrayList<>();

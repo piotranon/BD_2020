@@ -3,10 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import entity.*;
 import javafx.event.ActionEvent;
@@ -88,15 +85,15 @@ public class addBook {
             System.out.println("4");
             validData = false;
         }
-        if (data.getValue().equals(null)) {
+        if (data.getValue()==null) {
             System.out.println("5");
             validData = false;
         }
-        if (wydawnictwo.getSelectionModel().getSelectedItem().equals(null)) {
+        if (wydawnictwo.getSelectionModel().getSelectedItem()==null) {
             System.out.println("6");
             validData = false;
         }
-        if (kategoria.getSelectionModel().getSelectedItem().equals(null)) {
+        if (kategoria.getSelectionModel().getSelectedItem()==null) {
             System.out.println("7");
             validData = false;
         }
@@ -105,8 +102,9 @@ public class addBook {
             Ksiazki nowa = new Ksiazki();
 
             wydaw.setId_wydawnictwa(wydawnictwo.getSelectionModel().getSelectedItem().Value);
+            wydaw.setNazwa(wydawnictwo.getSelectionModel().getSelectedItem().Text);
             kat.setId_kategorii(kategoria.getSelectionModel().getSelectedItem().Value);
-
+            kat.setNazwa(kategoria.getSelectionModel().getSelectedItem().Text);
             List<Autorzy> autorzy = new ArrayList<>();
             for (int i = 0; i < autorzyListaAktualne.getItems().size(); i++) {
                 Autorzy a = new Autorzy();
@@ -118,6 +116,8 @@ public class addBook {
             for (int i = 0; i < tagiListaAktualne.getItems().size(); i++) {
                 Tag tag = new Tag();
                 tag.setId_tagu(tagiListaAktualne.getItems().get(i).Value);
+                tag.setNazwa(tagiListaAktualne.getItems().get(i).Text);
+                tagi.add(tag);
             }
 
             nowa.setTytul(name.getText());
@@ -128,10 +128,8 @@ public class addBook {
             nowa.setAutorzy(autorzy);
             nowa.setTags(tagi);
 
-            db.session.beginTransaction();
-            db.session.save(nowa);
+            db.session.saveOrUpdate(nowa);
             db.session.getTransaction().commit();
-
             cancel(event);
 
         } else {
@@ -264,6 +262,7 @@ public class addBook {
 
     void renderTags() {
         tagiLista.getItems().clear();
+
         ProcedureCall call = db.session.createStoredProcedureCall("GETTAGI");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();

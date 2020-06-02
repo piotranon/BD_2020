@@ -22,14 +22,13 @@ Każda książka może zawierać wiele autorów, tagów.
 
 #### PLSQL
   (Linki jeszcze nie działaja ale niżej można podejrzeć wygląd procedur)   
-  1. Tabela   
-     * [Tabele](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Opis%20Projektu.md#plsql-tabeli)  
-     pracownicy, klienci, adres, ksiazki, ksiazki_tag, tag, wydawnictwa, autorzy, autorzy_ksiazki, kategorie, wypozyczenia   
-     * [Połączenia pomiędzy Tabelami]()
-  1. Procedury   
-     * [Pobierające](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Opis%20Projektu.md#plsql-procedury) 
+  1. [Tabela](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Opis%20Projektu.md#plsql-tabeli)  
+     * Tabele  
+       pracownicy, klienci, adres, ksiazki, ksiazki_tag, tag, wydawnictwa, autorzy, autorzy_ksiazki, kategorie, wypozyczenia   
+  1. [Procedury](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Opis%20Projektu.md#plsql-procedury)  
+     * Pobierające  
         GETADRES, GETPRACOWNIK, GETTAGI, GETAUTORZY, GETKATEGORIE, GETWYDAWNICTWA,   
-     * [Dodające]()
+     * Dodające   
         ADDAUTOR, ADDKATEGORIA, ADDTAG
   1. [Sekwencje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Opis%20Projektu.md#plsql-sekwencje)  
      * inkrementacyjne  
@@ -256,6 +255,19 @@ Każda książka może zawierać wiele autorów, tagów.
                 Select 
                     *
                 from wydawnictwa;
+        END;
+        ```
+   1. Procedura "GETAUTOR" zwraca dane autora o podanym id.
+        ```PL/SQL
+        create or replace NONEDITIONABLE PROCEDURE "GETAUTOR" 
+        (id IN autorzy.id_autora%TYPE,autorzyData OUT SYS_REFCURSOR)
+        AS
+        BEGIN
+            OPEN autorzyData FOR
+                Select 
+                    *
+                from autorzy
+                WHERE id_autora=id;
         END;
         ```
 #### PLSQL Sekwencje

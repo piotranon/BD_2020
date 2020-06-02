@@ -23,7 +23,7 @@ public class menu {
     private URL location;
 
     @FXML
-    void ksiazki(ActionEvent event) {
+    void ksiazki(ActionEvent event) throws IOException{
         render.booksLogged();
     }
 

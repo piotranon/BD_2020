@@ -120,7 +120,6 @@ public class login {
 
         Output output = call.getOutputs().getCurrent();
 
-
         if (output.isResultSet()) {
             List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
             if (!resultData.isEmpty()) {

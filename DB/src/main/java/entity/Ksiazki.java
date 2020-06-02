@@ -1,5 +1,11 @@
 package entity;
 
+import controllers.db;
+import net.bytebuddy.build.Plugin;
+import org.hibernate.procedure.ProcedureCall;
+import org.hibernate.result.Output;
+import org.hibernate.result.ResultSetOutput;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,15 +25,15 @@ public class Ksiazki {
     private Date data_wydania;
     private int ilosc;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="id_wydawnictwa",nullable = false)
     private Wydawnictwa wydawnictwo;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="id_kategorii",nullable = false)
     private Kategorie kategoria;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade={CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(
             name="autorzy_ksiazki",
             joinColumns = {@JoinColumn(name = "id_ksiazki")},
@@ -35,7 +41,7 @@ public class Ksiazki {
     )
     private List<Autorzy> autorzy=new ArrayList<>();
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade={CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(
             name="ksiazki_tag",
             joinColumns = {@JoinColumn(name = "id_ksiazki")},
@@ -44,7 +50,8 @@ public class Ksiazki {
     private List<Tag> tags=new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade={CascadeType.MERGE,CascadeType.PERSIST},
+            fetch = FetchType.EAGER,
             mappedBy = "ksiazka"
     )
     private List<Wypozyczenia> wypozyczenia=new ArrayList<>();
@@ -74,21 +81,41 @@ public class Ksiazki {
         return kategoria.getNazwa();
     }
 
-    public String getTagsWithHash()
+    public String getTagsHash()
     {
         StringBuilder xd = new StringBuilder("");
         for(int i=0;i<tags.size();i++)
         {
-            xd.append("#"+tags.get(i)+" ");
+            xd.append("#"+tags.get(i).getNazwa()+", ");
         }
+        if(xd.length()>1)
+            xd.deleteCharAt(xd.length()-1);
         return xd.toString();
     }
 
     public String getAutorzyNames()
     {
-        StringBuilder xd = new StringBuilder("");
+        StringBuilder xd = new StringBuilder();
         for(int i=0;i<autorzy.size();i++)
         {
+            if(autorzy.get(i).getImie()==null || autorzy.get(i).getNazwisko()==null)
+            {
+                ProcedureCall call = db.session.createStoredProcedureCall("GETAUTOR");
+                call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(autorzy.get(i).getId_autora());
+                call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
+
+                call.execute();
+                Output output = call.getOutputs().getCurrent();
+
+                if (output.isResultSet()) {
+                    List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
+                    if (!resultData.isEmpty()) {
+                        autorzy.get(i).setImie((String)resultData.get(0)[1]);
+                        autorzy.get(i).setNazwisko((String)resultData.get(0)[2]);
+                    }
+                }
+            }
+
             xd.append(autorzy.get(i).getImie()+" "+autorzy.get(i).getNazwisko().substring(0,1)+". ,");
         }
         if(xd.length()>1)

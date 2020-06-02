@@ -132,7 +132,7 @@ public class books {
 
     @FXML
     void logout(ActionEvent event) throws IOException {
-        render.login();
+        render.books();
     }
 
     @FXML

@@ -142,7 +142,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT autorzy_ksiazka FOREIGN KEY (id_autor
 ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
  ```
 #### PLSQL Procedury
-   1.  #####Procedura "ADDAUTOR" służy do utworzenia nowego autora w bazie danych.
+   1.  Procedura "ADDAUTOR" służy do utworzenia nowego autora w bazie danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "ADDAUTOR" 
         (imie IN VARCHAR2, nazwisko IN VARCHAR2)
@@ -151,7 +151,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
             INSERT INTO autorzy(id_autora,imie,nazwisko) VALUES (AUTORZY_INCREMENT.nextval,imie,nazwisko);
         END;
         ```
-   1.  #####Procedura "ADDKATEGORIA" służy do utworzenia nowej kategorii w bazie danych.
+   1.  Procedura "ADDKATEGORIA" służy do utworzenia nowej kategorii w bazie danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "ADDKATEGORIA" 
         (nazwa IN VARCHAR2)
@@ -160,7 +160,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
             INSERT INTO kategorie(id_kategorii,nazwa) VALUES (KATEGORIE_INCREMENT.nextval,nazwa);
         END;
         ```
-   1.  #####Procedura "ADDTAG" służy do utworzenia nowego tagu w bazie danych.
+   1.  Procedura "ADDTAG" służy do utworzenia nowego tagu w bazie danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "ADDTAG" 
         (nazwaTagu IN VARCHAR2)
@@ -169,7 +169,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
             INSERT INTO tag VALUES (TAG_INCREMENT.nextval,nazwaTagu);
         END;
         ```
-   1.  #####Procedura "GETADRES" zwraca dane dotyczące adresu o określonym id.
+   1.  Procedura "GETADRES" zwraca dane dotyczące adresu o określonym id.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETADRES" 
         (d_id IN adres.id_adresu%TYPE,data OUT SYS_REFCURSOR)
@@ -186,7 +186,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
                 Where id_adresu=d_id;
         END;
         ```
-   1.  #####Procedura "GETPRACOWNIK" zwraca informacje odnośnie pracownika o ile podany login i hasło są poprawne.
+   1.  Procedura "GETPRACOWNIK" zwraca informacje odnośnie pracownika o ile podany login i hasło są poprawne.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETPRACOWNIK" 
         (d_login IN pracownicy.login%TYPE,d_haslo IN pracownicy.haslo%TYPE,data OUT SYS_REFCURSOR)
@@ -206,7 +206,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
                 Where login=d_login AND haslo=d_haslo;
         END;
         ```
-   1. #####Procedura "GETTAGI" zwraca wszystkie tagi z bazy danych.
+   1. Procedura "GETTAGI" zwraca wszystkie tagi z bazy danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETTAGI" 
         (tagiData OUT SYS_REFCURSOR)
@@ -218,7 +218,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
                 from tag;
         END;
         ```
-   1. #####Procedura "GETAUTORZY" zwraca wszystkich autorów z bazy danych.
+   1. Procedura "GETAUTORZY" zwraca wszystkich autorów z bazy danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETAUTORZY" 
         (autorzyData OUT SYS_REFCURSOR)
@@ -230,7 +230,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
                 from autorzy;
         END;
         ```
-   1. #####Procedura "GETKATEGORIE" zwraca wszystkie kategorie z bazy danych.
+   1. Procedura "GETKATEGORIE" zwraca wszystkie kategorie z bazy danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETKATEGORIE" 
         (kategorieData OUT SYS_REFCURSOR)
@@ -242,7 +242,7 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
                 from kategorie;
         END;
         ```
-   1. #####Procedura "GETWYDAWNICTWA" zwraca wszystkie wudawnictwa z bazy danych.
+   1. Procedura "GETWYDAWNICTWA" zwraca wszystkie wudawnictwa z bazy danych.
         ```PL/SQL
         create or replace NONEDITIONABLE PROCEDURE "GETWYDAWNICTWA" 
         (wydawnictwaData OUT SYS_REFCURSOR)
@@ -255,47 +255,47 @@ ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiaz
         END;
         ```
 #### PLSQL Sekwencje
-   1. #####Sekwencja "adres_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "adres_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence adres_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja autorzy_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja autorzy_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence autorzy_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "kategorie_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "kategorie_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence kategorie_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "klienci_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "klienci_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence klienci_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "ksiazki_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "ksiazki_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence ksiazki_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "pracownicy_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "pracownicy_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence pracownicy_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "tag_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "tag_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence tag_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "wydawnictwa_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "wydawnictwa_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence wydawnictwa_increment start with 1
         increment by 1;
         ```
-   1. #####Sekwencja "wypozyczenia_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
+   1. Sekwencja "wypozyczenia_increment" służy do inkrementacji id przy dodawaniu nowych wierszy do tabeli. 
         ```PL/SQL
         Create sequence wypozyczenia_increment start with 1
         increment by 1;

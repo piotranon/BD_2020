@@ -33,7 +33,7 @@ Każda książka może zawierać wiele autorów, tagów.
     - inkrementacyjne  
         [adres_increment](),[autorzy_increment](),[kategorie_increment](),[klienci_increment](),[ksiazki_increment](),[pracownicy_increment](),[tag_increment](),[wydawnictwa_increment](),[wypozyczenia_increment]()
 #### PLSQL Tabeli
-    ```PL/SQL
+```PL/SQL
     CREATE TABLE pracownicy (
       id_pracownika int PRIMARY KEY,
       imie varchar(255),
@@ -41,19 +41,19 @@ Każda książka może zawierać wiele autorów, tagów.
       pesel varchar(255),
       data_urodzenia date,
       id_adresu int,
-      login varchar(255),
+      login varchar(255) UNIQUE,
       haslo varchar(255)
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE klienci (
       id_klienta int PRIMARY KEY,
       imie varchar(255),
       nazwisko varchar(255),
       id_adresu int
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE adres (
       id_adresu int PRIMARY KEY,
       miejscowosc varchar(255),
@@ -61,8 +61,8 @@ Każda książka może zawierać wiele autorów, tagów.
       ulica varchar(255),
       numer_budynku int
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE ksiazki (
       id_ksiazki int PRIMARY KEY,
       tytul varchar(255),
@@ -71,46 +71,46 @@ Każda książka może zawierać wiele autorów, tagów.
       id_wydawnictwa int,
       id_kategorii int,
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE ksiazki_tag (
       id_ksiazki int,
       id_tagu int
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE tag (
       id_tagu int PRIMARY KEY,
       nazwa varchar(255)
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE wydawnictwa (
       id_wydawnictwa int PRIMARY KEY,
       nazwa varchar(255),
       id_adresu int UNIQUE
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE autorzy (
       id_autora int PRIMARY KEY,
       imie varchar(255),
       nazwisko varchar(255)
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE autorzy_ksiazki (
       id_autora int,
       id_ksiazki int
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE kategorie (
       id_kategorii int PRIMARY KEY,
       nazwa varchar(255)
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     CREATE TABLE wypozyczenia (
       id_wypozyczenia int PRIMARY KEY,
       id_ksiazki int,
@@ -119,8 +119,8 @@ Każda książka może zawierać wiele autorów, tagów.
       data_wpozyczenia date,
       data_zwrotu date
     );
-    ```
-    ```PL/SQL
+```
+```PL/SQL
     ALTER TABLE pracownicy ADD CONSTRAINT pracownik_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
     
     ALTER TABLE klienci ADD CONSTRAINT klient_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
@@ -140,145 +140,145 @@ Każda książka może zawierać wiele autorów, tagów.
     
     ALTER TABLE autorzy_ksiazki ADD CONSTRAINT autorzy_ksiazka FOREIGN KEY (id_autora) REFERENCES autorzy (id_autora);
     ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
-    ```
+ ```
 #### PLSQL Procedury
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "ADDAUTOR" 
-    (imie IN VARCHAR2, nazwisko IN VARCHAR2)
-    AS
-    BEGIN
-        INSERT INTO autorzy(id_autora,imie,nazwisko) VALUES (AUTORZY_INCREMENT.nextval,imie,nazwisko);
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "ADDKATEGORIA" 
-    (nazwa IN VARCHAR2)
-    AS
-    BEGIN
-        INSERT INTO kategorie(id_kategorii,nazwa) VALUES (KATEGORIE_INCREMENT.nextval,nazwa);
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "ADDTAG" 
-    (nazwaTagu IN VARCHAR2)
-    AS
-    BEGIN
-        INSERT INTO tag VALUES (TAG_INCREMENT.nextval,nazwaTagu);
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETADRES" 
-    (d_id IN adres.id_adresu%TYPE,data OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN data FOR
-            Select 
-                ID_ADRESU ,
-                MIEJSCOWOSC ,
-                KOD_POCZTOWY ,
-                ULICA ,
-                NUMER_BUDYNKU 
-            from Adres
-            Where id_adresu=d_id;
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETPRACOWNIK" 
-    (d_login IN pracownicy.login%TYPE,d_haslo IN pracownicy.haslo%TYPE,data OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN data FOR
-            Select 
-                ID_PRACOWNIKA ,
-                IMIE ,
-                NAZWISKO ,
-                PESEL ,
-                DATA_URODZENIA ,
-                ID_ADRESU ,
-                LOGIN ,
-                HASLO  
-            from Pracownicy
-            Where login=d_login AND haslo=d_haslo;
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETTAGI" 
-    (tagiData OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN tagiData FOR
-            Select 
-                *
-            from tag;
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETAUTORZY" 
-    (autorzyData OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN autorzyData FOR
-            Select 
-                *
-            from autorzy;
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETKATEGORIE" 
-    (kategorieData OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN kategorieData FOR
-            Select 
-                *
-            from kategorie;
-    END;
-    ```
-    ```PL/SQL
-    create or replace NONEDITIONABLE PROCEDURE "GETWYDAWNICTWA" 
-    (wydawnictwaData OUT SYS_REFCURSOR)
-    AS
-    BEGIN
-        OPEN wydawnictwaData FOR
-            Select 
-                *
-            from wydawnictwa;
-    END;
-    ```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "ADDAUTOR" 
+(imie IN VARCHAR2, nazwisko IN VARCHAR2)
+AS
+BEGIN
+    INSERT INTO autorzy(id_autora,imie,nazwisko) VALUES (AUTORZY_INCREMENT.nextval,imie,nazwisko);
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "ADDKATEGORIA" 
+(nazwa IN VARCHAR2)
+AS
+BEGIN
+    INSERT INTO kategorie(id_kategorii,nazwa) VALUES (KATEGORIE_INCREMENT.nextval,nazwa);
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "ADDTAG" 
+(nazwaTagu IN VARCHAR2)
+AS
+BEGIN
+    INSERT INTO tag VALUES (TAG_INCREMENT.nextval,nazwaTagu);
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETADRES" 
+(d_id IN adres.id_adresu%TYPE,data OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN data FOR
+        Select 
+            ID_ADRESU ,
+            MIEJSCOWOSC ,
+            KOD_POCZTOWY ,
+            ULICA ,
+            NUMER_BUDYNKU 
+        from Adres
+        Where id_adresu=d_id;
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETPRACOWNIK" 
+(d_login IN pracownicy.login%TYPE,d_haslo IN pracownicy.haslo%TYPE,data OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN data FOR
+        Select 
+            ID_PRACOWNIKA ,
+            IMIE ,
+            NAZWISKO ,
+            PESEL ,
+            DATA_URODZENIA ,
+            ID_ADRESU ,
+            LOGIN ,
+            HASLO  
+        from Pracownicy
+        Where login=d_login AND haslo=d_haslo;
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETTAGI" 
+(tagiData OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN tagiData FOR
+        Select 
+            *
+        from tag;
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETAUTORZY" 
+(autorzyData OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN autorzyData FOR
+        Select 
+            *
+        from autorzy;
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETKATEGORIE" 
+(kategorieData OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN kategorieData FOR
+        Select 
+            *
+        from kategorie;
+END;
+```
+```PL/SQL
+create or replace NONEDITIONABLE PROCEDURE "GETWYDAWNICTWA" 
+(wydawnictwaData OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN wydawnictwaData FOR
+        Select 
+            *
+        from wydawnictwa;
+END;
+```
 #### PLSQL Sekwencje
-    ```PL/SQL
-    Create sequence adres_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence autorzy_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence kategorie_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence klienci_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence ksiazki_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence pracownicy_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence tag_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence wydawnictwa_increment start with 1
-    increment by 1;
-    ```
-    ```PL/SQL
-    Create sequence wypozyczenia_increment start with 1
-    increment by 1;
-    ```
+```PL/SQL
+Create sequence adres_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence autorzy_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence kategorie_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence klienci_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence ksiazki_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence pracownicy_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence tag_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence wydawnictwa_increment start with 1
+increment by 1;
+```
+```PL/SQL
+Create sequence wypozyczenia_increment start with 1
+increment by 1;
+```

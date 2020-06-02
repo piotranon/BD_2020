@@ -15,7 +15,7 @@ public class App extends Application {
         //polaczenie z baza
         sesja.sessionStart();
         render.stage=stage;
-        render.login();
+        render.books();
 
         //javafx view
 

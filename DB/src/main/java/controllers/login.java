@@ -8,6 +8,7 @@ import entity.Adres;
 import entity.Pracownicy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 public class login {
 
     public Stage stage;
-    public static Pracownicy zalogowany=new Pracownicy();
+    public static Pracownicy zalogowany = new Pracownicy();
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -45,18 +46,24 @@ public class login {
     private Label error; // Value injected by FXMLLoader
 
     @FXML
+    private Button close;
+
+    @FXML
     void clearTextFields(ActionEvent event) {
         login.setText("");
         haslo.setText("");
-        String[] dane=login.getText().split(" ");
+        String[] dane = login.getText().split(" ");
+    }
+
+
+    @FXML
+    void close(ActionEvent event) {
+        ((Stage)close.getScene().getWindow()).close();
     }
 
     @FXML
     void loginToSystem(ActionEvent event) throws IOException {
         error.setText("");
-
-
-
 
 
 //        List<Ksiazki> lista = query.getResultList();
@@ -107,57 +114,49 @@ public class login {
 
 
         ProcedureCall call = db.session.createStoredProcedureCall("GETPRACOWNIK");
-        call.registerParameter(1,String.class,ParameterMode.IN).bindValue(login.getText());
-        call.registerParameter(2,String.class,ParameterMode.IN).bindValue(haslo.getText());
-        call.registerParameter(3, Class.class,ParameterMode.REF_CURSOR);
+        call.registerParameter(1, String.class, ParameterMode.IN).bindValue(login.getText());
+        call.registerParameter(2, String.class, ParameterMode.IN).bindValue(haslo.getText());
+        call.registerParameter(3, Class.class, ParameterMode.REF_CURSOR);
 
         Output output = call.getOutputs().getCurrent();
 
 
-
-
         if (output.isResultSet()) {
             List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
-            if(!resultData.isEmpty())
-            {
-                zalogowany=new Pracownicy();
-                zalogowany.setId_pracownika(((BigDecimal)resultData.get(0)[0]).intValue());
-                zalogowany.setImie((String)resultData.get(0)[1]);
-                zalogowany.setNazwisko((String)resultData.get(0)[2]);
-                zalogowany.setPesel((String)resultData.get(0)[3]);
-                zalogowany.setData_urodzenia(new Date(((Timestamp)resultData.get(0)[4]).getTime()));
-                zalogowany.setLogin((String)resultData.get(0)[6]);
-                zalogowany.setHaslo((String)resultData.get(0)[7]);
+            if (!resultData.isEmpty()) {
+                zalogowany = new Pracownicy();
+                zalogowany.setId_pracownika(((BigDecimal) resultData.get(0)[0]).intValue());
+                zalogowany.setImie((String) resultData.get(0)[1]);
+                zalogowany.setNazwisko((String) resultData.get(0)[2]);
+                zalogowany.setPesel((String) resultData.get(0)[3]);
+                zalogowany.setData_urodzenia(new Date(((Timestamp) resultData.get(0)[4]).getTime()));
+                zalogowany.setLogin((String) resultData.get(0)[6]);
+                zalogowany.setHaslo((String) resultData.get(0)[7]);
 
-                Adres adres=new Adres();
+                Adres adres = new Adres();
 
                 ProcedureCall call1 = db.session.createStoredProcedureCall("GETADRES");
-                call1.registerParameter(1,Integer.class,ParameterMode.IN).bindValue(((BigDecimal)resultData.get(0)[5]).intValue());
-                call1.registerParameter(2, Class.class,ParameterMode.REF_CURSOR);
+                call1.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(((BigDecimal) resultData.get(0)[5]).intValue());
+                call1.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 
                 Output output1 = call1.getOutputs().getCurrent();
 
-                if(output1.isResultSet()){
+                if (output1.isResultSet()) {
                     List<Object[]> resultData1 = ((ResultSetOutput) output1).getResultList();
-                    if(!resultData.isEmpty())
-                    {
-                        for(int i=0;i<resultData1.get(0).length;i++)
-                            System.out.println(":"+resultData1.get(0)[i]);
-
-                        adres.setId_adresu(((BigDecimal)resultData1.get(0)[0]).intValue());
-                        adres.setMiejscowosc((String)resultData1.get(0)[1]);
-                        adres.setKod_Pocztowy((String)resultData1.get(0)[2]);
-                        adres.setUlica((String)resultData1.get(0)[3]);
-                        adres.setNumer_Budynku(((BigDecimal)resultData1.get(0)[4]).intValue());
+                    if (!resultData.isEmpty()) {
+                        adres.setId_adresu(((BigDecimal) resultData1.get(0)[0]).intValue());
+                        adres.setMiejscowosc((String) resultData1.get(0)[1]);
+                        adres.setKod_Pocztowy((String) resultData1.get(0)[2]);
+                        adres.setUlica((String) resultData1.get(0)[3]);
+                        adres.setNumer_Budynku(((BigDecimal) resultData1.get(0)[4]).intValue());
                     }
                 }
                 zalogowany.setAdres(adres);
-                System.out.println("ZALOGOWANO: "+zalogowany.toString());
+                System.out.println("ZALOGOWANO: " + zalogowany.toString());
 
-                render.menu();
-
-            }else
-            {
+                render.booksLogged();
+                ((Stage)error.getScene().getWindow()).close();
+            } else {
                 error.setText("NIE POPRAWNE DANE LOGOWANIA");
                 System.out.println("Błąd logowania");
             }
@@ -217,7 +216,6 @@ public class login {
 //        prac.setNazwisko((String)objectList.get(0)[2]);
 //        prac.setPesel((String)objectList.get(0)[3]);
 //        prac.setData_urodzenia((Date)objectList.get(0)[4]);
-
 
 
 //        System.out.println(pracownik2[0].getClass().getName());
@@ -299,11 +297,6 @@ public class login {
 //        }
 
 
-
-
-
-
-
 //        List books=query.getResultList();
 //
 //        Query query = dbSession.session.createSQLQuery("CALL GET_PRACOWNIK_DATA(:login,:haslo,:danepracownika)")
@@ -313,12 +306,13 @@ public class login {
 //        System.out.println(query.list().toString());
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert login != null : "fx:id=\"login\" was not injected: check your FXML file 'login.fxml'.";
         assert haslo != null : "fx:id=\"hasło\" was not injected: check your FXML file 'login.fxml'.";
         assert error != null : "fx:id=\"error\" was not injected: check your FXML file 'login.fxml'.";
-        zalogowany=new Pracownicy();
+        zalogowany = new Pracownicy();
         System.out.println("rerender");
     }
 

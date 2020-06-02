@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import entity.Pracownicy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
@@ -25,7 +24,7 @@ public class menu {
 
     @FXML
     void ksiazki(ActionEvent event) {
-        render.books();
+        render.booksLogged();
     }
 
     @FXML

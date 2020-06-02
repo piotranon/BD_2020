@@ -9,17 +9,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class db {
-    public static SessionFactory sessionFactory=null;
-    public static Session session=null;
+    public static SessionFactory sessionFactory = null;
+    public static Session session = null;
 
-    public void sessionStart(){
-        if(sessionFactory==null)
-        {
+    public void sessionStart() {
+        if (sessionFactory == null) {
             sessionFactory = new Configuration().configure().buildSessionFactory();
             session = sessionFactory.openSession();
+            session.beginTransaction();
             System.out.println("rozpoczeto sesje");
-        }
-        else
+        } else
             System.out.println("sesja juz istnieje");
     }
 

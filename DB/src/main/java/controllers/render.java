@@ -35,7 +35,7 @@ public class render {
         stage.show();
     }
 
-    public static void books() {
+    public static void booksLogged() {
         FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/books.fxml"));
         Parent root = null;
         try {
@@ -44,6 +44,19 @@ public class render {
             e.printStackTrace();
         }
         books controller = (books) loader.getController();
+        stage.setTitle("BD 2020 Długosz Piotr");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    public static void books() {
+        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/booksUser.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        booksUser controller = (booksUser) loader.getController();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));
         stage.show();

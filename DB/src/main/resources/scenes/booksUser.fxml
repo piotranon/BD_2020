@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.books">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.booksUser">
    <right>
       <GridPane prefHeight="375.0" prefWidth="197.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -44,26 +44,12 @@
                </GridPane.margin>
             </TextField>
             <Label style="-fx-font-weight: bold;" text="Wyszukiwarka" />
-            <Button fx:id="button" mnemonicParsing="false" onAction="#bookNew" style="-fx-background-color: #5AFF1C; -fx-border-style: solid; -fx-border-radius: 10; -fx-background-radius: 10;" text="Nowa Książka" GridPane.rowIndex="4">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button mnemonicParsing="false" onAction="#bookRemove" style="-fx-background-color: #ff1100; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Usuń Książkę" GridPane.rowIndex="6">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
             <Button mnemonicParsing="false" onAction="#reloadDataToView" style="-fx-background-color: #7395AE; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Odśwież dane" GridPane.rowIndex="11">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
             <Label style="-fx-font-weight: bold;" text="Książki" GridPane.rowIndex="3" />
-            <Label style="-fx-font-weight: bold;" text="Wypożyczenie" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" onAction="#bookRent" style="-fx-background-color: #00BFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Wypożycz Książkę" GridPane.rowIndex="9">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FF9F00; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Statystyki / Edytuj Książkę" GridPane.rowIndex="5">
+            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FF9F00; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Dane Książki" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -108,20 +94,13 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="68.0" style="-fx-background-color: null;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="68.0" style="-fx-background-color: null;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#menu" prefHeight="41.0" prefWidth="67.0" style="-fx-background-color: null;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#login" style="-fx-background-color: none;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="56.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/logout.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#menu" prefHeight="41.0" prefWidth="67.0" style="-fx-background-color: null;" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <graphic>
-                  <ImageView fitHeight="33.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/menu.png" />
+                        <Image url="@images/user.png" />
                      </image>
                   </ImageView>
                </graphic>

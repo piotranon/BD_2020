@@ -1,13 +1,7 @@
 package controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.Predicate;
-
-import entity.*;
+import entity.Ksiazki;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,45 +22,43 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class books {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
+public class booksUser {
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
+    @FXML
+    private TextField search;
 
-    @FXML // fx:id="search"
-    private TextField search; // Value injected by FXMLLoader
+    @FXML
+    private TableView<Ksiazki> tableview;
 
-    @FXML // fx:id="tableview"
-    private TableView<Ksiazki> tableview; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<?, ?> name;
 
-    @FXML // fx:id="name"
-    private TableColumn<?, ?> name; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<?, ?> amount;
 
-    @FXML // fx:id="surname"
-    private TableColumn<?, ?> amount; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<?, ?> category;
 
-    @FXML // fx:id="pin"
-    private TableColumn<?, ?> category; // Value injected by FXMLLoader
-
-    @FXML // fx:id="join_date"
-    private TableColumn<?, ?> wydawnictwo; // Value injected by FXMLLoader
-
-    @FXML // fx:id="join_date1"
-    private TableColumn<?, ?> tags; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<?, ?> wydawnictwo;
 
     @FXML
     private TableColumn<?, ?> autorzy;
 
-    @FXML // fx:id="join_date2"
-    private TableColumn<?, ?> popularnosc; // Value injected by FXMLLoader
+    @FXML
+    private TableColumn<?, ?> tags;
 
     @FXML
-    private Button button;
+    private TableColumn<?, ?> popularnosc;
 
     private List<Ksiazki> localBooksList = new ArrayList<>();
+
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -77,15 +68,20 @@ public class books {
     }
 
     @FXML
-    void bookNew(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/addBook.fxml"));
+    void limitList(KeyEvent event) {
+        sortedList(localBooksList);
+    }
+
+    @FXML
+    void login(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/login.fxml"));
         Parent root = null;
         try {
             root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        addBook controller = (addBook) loader.getController();
+        login controller = (login) loader.getController();
         Stage stage = new Stage();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.initModality(Modality.WINDOW_MODAL);
@@ -109,35 +105,19 @@ public class books {
             }
         });
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(button.getScene().getWindow());
+        stage.initOwner(search.getScene().getWindow());
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        reload();
     }
 
     @FXML
-    void bookRemove(ActionEvent event) {
+    void logout(ActionEvent event) {
 
-    }
-
-    @FXML
-    void bookRent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void limitList(KeyEvent event) {
-        sortedList(localBooksList);
-    }
-
-    @FXML
-    void logout(ActionEvent event) throws IOException {
-        render.login();
     }
 
     @FXML
     void menu(ActionEvent event) {
-        render.menu();
+
     }
 
     @FXML
@@ -173,7 +153,7 @@ public class books {
         filteredList.setPredicate(predicate);
 
         SortedList<Ksiazki> sortedData = new SortedList<Ksiazki>(filteredList);
-        sortedData.comparatorProperty().bind(tableview.comparatorProperty());
+        sortedData.comparatorProperty().bind((ObservableValue<? extends Comparator<? super Ksiazki>>) tableview.comparatorProperty());
 
         tableview.setItems(sortedData);
     }
@@ -197,4 +177,5 @@ public class books {
 
         reload();
     }
+
 }

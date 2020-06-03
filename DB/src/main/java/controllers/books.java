@@ -28,6 +28,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 public class books {
 
@@ -73,7 +78,43 @@ public class books {
 
     @FXML
     void bookDetails(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/editBook.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editBook controller = (editBook) loader.getController();
+        Stage stage = new Stage();
+        stage.setTitle("BD 2020 Długosz Piotr");
+        stage.initModality(Modality.WINDOW_MODAL);
+        xOffset = 0;
+        yOffset = 0;
+        //move window easly
+        controller.edited=tableview.getSelectionModel().getSelectedItem();
+        controller.reload();
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
 
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+        });
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(button.getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
+//        localBooksList.add(controller.nowa);
+        reload();
     }
 
     @FXML
@@ -112,6 +153,7 @@ public class books {
         stage.initOwner(button.getScene().getWindow());
         stage.setScene(new Scene(root));
         stage.showAndWait();
+        localBooksList.add(controller.nowa);
         reload();
     }
 
@@ -172,6 +214,9 @@ public class books {
 
         tableview.setItems(sortedData);
     }
+
+    private SessionFactory sessionFactory;
+    private Session session;
 
     public void reload() {
         localBooksList = db.loadAllData(Ksiazki.class);

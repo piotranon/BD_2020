@@ -33,6 +33,10 @@ public class addAuthor {
             validData=false;
         if(surname.getText().isEmpty())
             validData=false;
+        if(Character.getType(name.getText().charAt(0))!=Character.UPPERCASE_LETTER)
+            validData = false;
+        if(Character.getType(surname.getText().charAt(0))!=Character.UPPERCASE_LETTER)
+            validData = false;
         if(validData)
         {
             ProcedureCall call = db.session.createStoredProcedureCall("ADDAUTOR");
@@ -48,9 +52,9 @@ public class addAuthor {
         }else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Wystąpił błąd");
-            alert.setContentText("Nie wszystkie podane dane są poprawne");
+            alert.setTitle("Wystąpił Błąd");
+            alert.setHeaderText("Nie wszystkie podane dane są poprawne.");
+            alert.setContentText("Imię i nazwisko autora musi się zaczynać z dużej litery");
             alert.showAndWait();
         }
     }

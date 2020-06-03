@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -19,8 +20,22 @@ public class addCategory {
 
         @FXML
         void add(ActionEvent event) {
-            if(category.getText().length()<1)
+            boolean validData = true;
+
+            if(category.getText().isEmpty())
+                validData = false;
+            if(Character.getType(category.getText().charAt(0))!=Character.UPPERCASE_LETTER)
+                validData = false;
+            if(!validData)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Błąd");
+                alert.setHeaderText("Błąd nazwy");
+                alert.setContentText("Nazwa musi zaczynać się z dużej litery.");
+                alert.showAndWait();
+
                 return;
+            }
 
             ProcedureCall call = db.session.createStoredProcedureCall("ADDKATEGORIA");
             call.registerParameter(1, String.class, ParameterMode.IN);

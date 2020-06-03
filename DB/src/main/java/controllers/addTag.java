@@ -19,7 +19,12 @@ public class addTag {
 
     @FXML
     void add(ActionEvent event) {
-        if(tag.getText().length()<1)
+        boolean validData = true;
+
+        if(tag.getText().isEmpty())
+            validData = false;
+
+        if(!validData)
             return;
 
         ProcedureCall call = db.session.createStoredProcedureCall("ADDTAG");

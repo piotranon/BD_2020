@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -64,7 +65,52 @@ public class booksUser {
 
     @FXML
     void bookDetails(ActionEvent event) {
+        if(tableview.getSelectionModel().getSelectedItem()!=null)
+        {
+            FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/booksInfo.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            booksInfo controller = (booksInfo) loader.getController();
+            controller.book=tableview.getSelectionModel().getSelectedItem();
+            controller.render();
+            Stage stage = new Stage();
+            stage.setTitle("BD 2020 Długosz Piotr");
+            stage.initModality(Modality.WINDOW_MODAL);
+            xOffset = 0;
+            yOffset = 0;
+            //move window easly
 
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initOwner(search.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText("Dane nie poprawne.");
+            alert.setContentText("Nie wybrałeś książki z listy.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -118,11 +164,6 @@ public class booksUser {
     @FXML
     void menu(ActionEvent event) {
 
-    }
-
-    @FXML
-    void reloadDataToView(ActionEvent event) {
-        reload();
     }
 
     void sortedList(List<Ksiazki> booksList) {

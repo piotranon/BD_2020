@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.books">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.books">
    <right>
       <GridPane prefHeight="375.0" prefWidth="197.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -27,10 +27,12 @@
           <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="5.0" prefHeight="34.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="5.0" prefHeight="37.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="9.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -48,22 +50,32 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button mnemonicParsing="false" onAction="#bookRemove" style="-fx-background-color: #ff1100; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Usuń Książkę" GridPane.rowIndex="6">
+            <Button mnemonicParsing="false" onAction="#bookRemove" style="-fx-background-color: #ff1100; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Usuń Książkę" GridPane.rowIndex="7">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button mnemonicParsing="false" onAction="#reloadDataToView" style="-fx-background-color: #7395AE; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Odśwież dane" GridPane.rowIndex="11">
+            <Button mnemonicParsing="false" onAction="#reloadDataToView" style="-fx-background-color: #7395AE; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Odśwież dane" GridPane.rowIndex="13">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
             <Label style="-fx-font-weight: bold;" text="Książki" GridPane.rowIndex="3" />
-            <Label style="-fx-font-weight: bold;" text="Wypożyczenie" GridPane.rowIndex="8" />
-            <Button mnemonicParsing="false" onAction="#bookRent" style="-fx-background-color: #00BFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Wypożycz Książkę" GridPane.rowIndex="9">
+            <Label style="-fx-font-weight: bold;" text="Wypożyczenie" GridPane.rowIndex="9" />
+            <Button mnemonicParsing="false" onAction="#bookRent" style="-fx-background-color: #00BFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Wypożycz Książkę" GridPane.rowIndex="10">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FF9F00; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Statystyki / Edytuj Książkę" GridPane.rowIndex="5">
+            <Button mnemonicParsing="false" onAction="#editBook" style="-fx-background-color: #FF9F00; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Edytuj Książkę" GridPane.rowIndex="5">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FFD300; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Więcej informacji" GridPane.rowIndex="6">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#returnBook" style="-fx-background-color: #00BFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Zwrot Książki" GridPane.rowIndex="11">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -95,8 +107,8 @@
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1064.0" minWidth="10.0" prefWidth="1011.0" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="81.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="68.0" />
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="32.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="26.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="72.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
@@ -108,15 +120,14 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="68.0" style="-fx-background-color: null;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="68.0" style="-fx-background-color: null;" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="34.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/logout.png" />
                      </image>
                   </ImageView>
-               </graphic>
-            </Button>
+               </graphic></Button>
          </children>
       </GridPane>
    </top>

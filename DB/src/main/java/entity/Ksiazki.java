@@ -88,8 +88,8 @@ public class Ksiazki {
         {
             xd.append("#"+tags.get(i).getNazwa()+", ");
         }
-        if(xd.length()>1)
-            xd.deleteCharAt(xd.length()-1);
+        if(xd.toString().length()>1)
+            xd.deleteCharAt(xd.length()-2);
         return xd.toString();
     }
 

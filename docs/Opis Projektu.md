@@ -90,7 +90,7 @@ Każda książka może zawierać wiele autorów, tagów.
     ```PL/SQL
     CREATE TABLE wydawnictwa (
         id_wydawnictwa int PRIMARY KEY,
-        nazwa varchar(255),
+        nazwa varchar(255) UNIQUE,
         id_adresu int UNIQUE
     );
     ```
@@ -110,7 +110,7 @@ Każda książka może zawierać wiele autorów, tagów.
     ```PL/SQL
     CREATE TABLE kategorie (
         id_kategorii int PRIMARY KEY,
-        nazwa varchar(255)
+        nazwa varchar(255) UNIQUE
     );
     ```
     ```PL/SQL

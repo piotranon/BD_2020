@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.booksUser">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="1192.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.booksUser">
    <right>
       <GridPane prefHeight="375.0" prefWidth="197.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -44,12 +44,8 @@
                </GridPane.margin>
             </TextField>
             <Label style="-fx-font-weight: bold;" text="Wyszukiwarka" />
-            <Button mnemonicParsing="false" onAction="#reloadDataToView" style="-fx-background-color: #7395AE; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Odśwież dane" GridPane.rowIndex="11">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
             <Label style="-fx-font-weight: bold;" text="Książki" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FF9F00; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Dane Książki" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FFD300; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Dane Książki" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

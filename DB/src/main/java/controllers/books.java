@@ -2,8 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -18,10 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -77,48 +76,59 @@ public class books {
     private double yOffset = 0;
 
     @FXML
-    void bookDetails(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/editBook.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        editBook controller = (editBook) loader.getController();
-        Stage stage = new Stage();
-        stage.setTitle("BD 2020 Długosz Piotr");
-        stage.initModality(Modality.WINDOW_MODAL);
-        xOffset = 0;
-        yOffset = 0;
-        //move window easly
-        controller.edited=tableview.getSelectionModel().getSelectedItem();
-        controller.reload();
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
+    void editBook(ActionEvent event) throws IOException {
+        if(tableview.getSelectionModel().getSelectedItem()!=null)
+        {
+            FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/editBook.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+            editBook controller = (editBook) loader.getController();
+            Stage stage = new Stage();
+            stage.setTitle("BD 2020 Długosz Piotr");
+            stage.initModality(Modality.WINDOW_MODAL);
+            xOffset = 0;
+            yOffset = 0;
+            //move window easly
+            Ksiazki editedOne=tableview.getSelectionModel().getSelectedItem();
+            controller.edited=editedOne;
+            controller.reload();
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
 
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() - xOffset);
-                stage.setY(event.getScreenY() - yOffset);
-            }
-        });
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(button.getScene().getWindow());
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-//        localBooksList.add(controller.nowa);
-        reload();
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initOwner(button.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            render.booksLogged();
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText("Dane nie poprawne.");
+            alert.setContentText("Nie wybrałeś książki z listy.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    void bookNew(ActionEvent event) {
+    void bookNew(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/addBook.fxml"));
         Parent root = null;
         try {
@@ -153,17 +163,93 @@ public class books {
         stage.initOwner(button.getScene().getWindow());
         stage.setScene(new Scene(root));
         stage.showAndWait();
-        localBooksList.add(controller.nowa);
-        reload();
+//        localBooksList.add(controller.nowa);
+        render.booksLogged();
+
+    }
+    @FXML
+    void bookDetails(ActionEvent event)
+    {
+        if(tableview.getSelectionModel().getSelectedItem()!=null)
+        {
+            FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/booksInfo.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            booksInfo controller = (booksInfo) loader.getController();
+            controller.book=tableview.getSelectionModel().getSelectedItem();
+            controller.render();
+            Stage stage = new Stage();
+            stage.setTitle("BD 2020 Długosz Piotr");
+            stage.initModality(Modality.WINDOW_MODAL);
+            xOffset = 0;
+            yOffset = 0;
+            //move window easly
+
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initOwner(button.getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText("Dane nie poprawne.");
+            alert.setContentText("Nie wybrałeś książki z listy.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void bookRemove(ActionEvent event) {
+        if(tableview.getSelectionModel().getSelectedItem()!=null)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Look, a Confirmation Dialog");
+            alert.setContentText("Are you ok with this?");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+
+            }
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText("Dane nie poprawne.");
+            alert.setContentText("Nie wybrałeś książki z listy.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     void bookRent(ActionEvent event) {
+
+    }
+
+    @FXML
+    void returnBook(ActionEvent event)
+    {
 
     }
 
@@ -211,7 +297,6 @@ public class books {
 
         SortedList<Ksiazki> sortedData = new SortedList<Ksiazki>(filteredList);
         sortedData.comparatorProperty().bind(tableview.comparatorProperty());
-
         tableview.setItems(sortedData);
     }
 
@@ -219,8 +304,13 @@ public class books {
     private Session session;
 
     public void reload() {
+        localBooksList.clear();
         localBooksList = db.loadAllData(Ksiazki.class);
-        System.out.println(localBooksList.toString());
+
+        System.out.println("books:");
+        for(int i=0;i<localBooksList.size();i++)
+            System.out.println(localBooksList.get(i).toString());
+
         search.setText("");
         sortedList(localBooksList);
     }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="1034.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.editBook">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="1034.0" style="-fx-background-color: #237FDB; -fx-border-style: solid; -fx-border-width: 3px;" stylesheets="@css/books.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.editBook">
    <top>
       <Label text="Edytowanie Książki" BorderPane.alignment="CENTER">
          <BorderPane.margin>

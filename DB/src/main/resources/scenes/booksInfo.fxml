@@ -12,24 +12,24 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="600.0" style="-fx-background-color: #FFD300; -fx-border-color: black; -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.booksInfo">
    <left>
       <GridPane prefHeight="409.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="203.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="397.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="298.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="296.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="48.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="330.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="315.0" minHeight="4.0" prefHeight="31.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="6.0" prefHeight="38.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="330.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="315.0" minHeight="4.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="6.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="315.0" minHeight="10.0" prefHeight="44.5" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Dane Książki" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -37,17 +37,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label text="Tytuł : " GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label text="Wydawnictwo :" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Kategoria :" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label text="Tagi :" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label text="Data wydania :" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-            <Label text="Autorzy :" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-            </Label>
-            <LineChart prefHeight="101.0" prefWidth="600.0" title="Popularność" GridPane.columnSpan="2" GridPane.rowIndex="7">
+            <LineChart prefHeight="101.0" prefWidth="600.0" title="Popularność" GridPane.columnSpan="2" GridPane.rowIndex="8">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -58,7 +48,97 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </LineChart>
-            <Button mnemonicParsing="false" text="Button" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <Button fx:id="close" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="63.0" style="-fx-background-color: red; -fx-border-color: black; -fx-border-radius: 2px;" text="Powrót" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+            <Label fx:id="title" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="publish" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="category" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="dataWydania" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="autorzy" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Tytuł :" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label text="Wydawnictwo :" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Kategoria :" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Tagi :" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Data wydania :" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label text="Autorzy :" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="tags" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Ilość :" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="amount" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </left>

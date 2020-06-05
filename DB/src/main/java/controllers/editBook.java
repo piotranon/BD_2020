@@ -1,16 +1,12 @@
 package controllers;
 
-        import entity.ComboboxItem;
-        import entity.Ksiazki;
+        import entity.*;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ComboBox;
-        import javafx.scene.control.DatePicker;
-        import javafx.scene.control.TextField;
+        import javafx.scene.control.*;
         import javafx.stage.Modality;
         import javafx.stage.Stage;
         import org.hibernate.procedure.ProcedureCall;
@@ -21,6 +17,7 @@ package controllers;
         import java.io.IOException;
         import java.math.BigDecimal;
         import java.time.ZoneId;
+        import java.util.ArrayList;
         import java.util.List;
 
 public class editBook {
@@ -112,8 +109,92 @@ public class editBook {
     @FXML
     void edit(ActionEvent event) {
         //update in database
+        boolean validData = true;
+        Wydawnictwa wydaw = new Wydawnictwa();
+        Kategorie kat = new Kategorie();
+        if (name.getText().length() < 1) {
+            System.out.println("1");
+            validData = false;
+        }
+        if (amount.getText().length() < 1) {
+            System.out.println("2");
+            validData = false;
+        }
+        if (autorzyListaAktualne.getItems().size() < 1) {
+            System.out.println("3");
+            validData = false;
+        }
+        if (tagiListaAktualne.getItems().size() < 1) {
+            System.out.println("4");
+            validData = false;
+        }
+        if (data.getValue()==null) {
+            System.out.println("5");
+            validData = false;
+        }
+        if (wydawnictwo.getSelectionModel().getSelectedItem()==null) {
+            System.out.println("6");
+            validData = false;
+        }
+        if (kategoria.getSelectionModel().getSelectedItem()==null) {
+            System.out.println("7");
+            validData = false;
+        }
 
-        edited=null;
+        if (validData) {
+            wydaw.setId_wydawnictwa(wydawnictwo.getSelectionModel().getSelectedItem().Value);
+            wydaw.setNazwa(wydawnictwo.getSelectionModel().getSelectedItem().Text);
+            kat.setId_kategorii(kategoria.getSelectionModel().getSelectedItem().Value);
+            kat.setNazwa(kategoria.getSelectionModel().getSelectedItem().Text);
+            List<Autorzy> autorzy = new ArrayList<>();
+            for (int i = 0; i < autorzyListaAktualne.getItems().size(); i++) {
+                Autorzy a = new Autorzy();
+                a.setId_autora(autorzyListaAktualne.getItems().get(i).Value);
+
+                ProcedureCall call = db.session.createStoredProcedureCall("GETAUTOR");
+                call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(a.getId_autora());
+                call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
+
+                call.execute();
+                Output output = call.getOutputs().getCurrent();
+
+                if (output.isResultSet()) {
+                    List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
+                    if (!resultData.isEmpty()) {
+                        a.setImie((String)resultData.get(0)[1]);
+                        a.setNazwisko((String)resultData.get(0)[2]);
+                    }
+                }
+                autorzy.add(a);
+            }
+
+            List<Tag> tagi = new ArrayList<>();
+            for (int i = 0; i < tagiListaAktualne.getItems().size(); i++) {
+                Tag tag = new Tag();
+                tag.setId_tagu(tagiListaAktualne.getItems().get(i).Value);
+                tag.setNazwa(tagiListaAktualne.getItems().get(i).Text);
+                tagi.add(tag);
+            }
+
+            edited.setTytul(name.getText());
+            edited.setIlosc(Integer.parseInt(amount.getText()));
+            edited.setData_wydania(java.sql.Date.valueOf(data.getValue()));
+            edited.setWydawnictwo(wydaw);
+            edited.setKategoria(kat);
+            edited.setAutorzy(autorzy);
+            edited.setTags(tagi);
+
+            db.session.saveOrUpdate(edited);
+            db.session.getTransaction().commit();
+            cancel(event);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Wystąpił błąd");
+            alert.setContentText("Nie wszystkie podane dane są poprawne");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -188,6 +269,9 @@ public class editBook {
             item.Text = edited.getTags().get(i).getNazwa();
             item.Value = edited.getTags().get(i).getId_tagu();
             tagiListaAktualne.getItems().add(item);
+
+            if(i==edited.getTags().size()-1)
+                tagiListaAktualne.getSelectionModel().select(item);
         }
 
         ProcedureCall call = db.session.createStoredProcedureCall("GETTAGI");
@@ -219,6 +303,9 @@ public class editBook {
             item.Text = edited.getAutorzy().get(i).getImie() + " " + edited.getAutorzy().get(i).getNazwisko();
             item.Value = edited.getAutorzy().get(i).getId_autora();
             autorzyListaAktualne.getItems().add(item);
+
+            if(i==edited.getAutorzy().size()-1)
+                autorzyListaAktualne.getSelectionModel().select(item);
         }
 
         ProcedureCall call = db.session.createStoredProcedureCall("GETAUTORZY");
@@ -305,6 +392,7 @@ public class editBook {
 
     @FXML
     void initialize() {
+//        reload();
     }
 
 }

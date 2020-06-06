@@ -114,12 +114,13 @@ public class login {
 
 
         ProcedureCall call = db.session.createStoredProcedureCall("GETPRACOWNIK");
-        call.registerParameter(1, String.class, ParameterMode.IN).bindValue(login.getText());
-        call.registerParameter(2, String.class, ParameterMode.IN).bindValue(haslo.getText());
+        call.registerParameter(1, String.class, ParameterMode.IN).bindValue("login");
+        call.registerParameter(2, String.class, ParameterMode.IN).bindValue("haslo");
         call.registerParameter(3, Class.class, ParameterMode.REF_CURSOR);
 
         Output output = call.getOutputs().getCurrent();
-
+//        List<Object[]> resultData2 = ((ResultSetOutput) output).getResultList();
+//        System.out.println("xd: "+resultData2.get(0)[0]);
         if (output.isResultSet()) {
             List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
             if (!resultData.isEmpty()) {

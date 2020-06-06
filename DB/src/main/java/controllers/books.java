@@ -230,7 +230,8 @@ public class books {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 // ... user chose OK
-
+                db.session.delete(tableview.getSelectionModel().getSelectedItem());
+                db.session.getTransaction().commit();
             }
         }else
         {

@@ -201,7 +201,6 @@ public class booksUser {
 
     public void reload() {
         localBooksList = db.loadAllData(Ksiazki.class);
-        System.out.println("tags: "+localBooksList.get(1).getTagsHash());
         search.setText("");
         sortedList(localBooksList);
     }
@@ -216,8 +215,6 @@ public class booksUser {
         autorzy.setCellValueFactory(new PropertyValueFactory("AutorzyNames"));
         tags.setCellValueFactory(new PropertyValueFactory("TagsHash"));
         popularnosc.setCellValueFactory(new PropertyValueFactory("Popularnosc"));
-
-        reload();
     }
 
 }

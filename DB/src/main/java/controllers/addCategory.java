@@ -40,12 +40,25 @@ public class addCategory {
             ProcedureCall call = db.session.createStoredProcedureCall("ADDKATEGORIA");
             call.registerParameter(1, String.class, ParameterMode.IN);
             call.setParameter(1,category.getText());
-            call.execute();
+            boolean er=false;
+            try {
+                call.executeUpdate();
+            }catch (Exception e)
+            {
+                er=true;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Błąd");
+                alert.setHeaderText("Błąd podczas dodawania");
+                alert.setContentText("Wystąpił błąd podczas dodawania.");
+                alert.showAndWait();
+                close(event);
+            }
+            if(!er)
+                close(event);
         }
 
         @FXML
         void close(ActionEvent event) {
             ((Stage)close.getScene().getWindow()).close();
         }
-
     }

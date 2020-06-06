@@ -26,6 +26,7 @@ public class render {
         Parent root = null;
         root = loader.load();
         books controller = (books) loader.getController();
+        controller.reload();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));
         stage.show();
@@ -35,6 +36,7 @@ public class render {
         Parent root = null;
         root = loader.load();
         booksUser controller = (booksUser) loader.getController();
+        controller.reload();
         stage.setTitle("BD 2020 Długosz Piotr");
         stage.setScene(new Scene(root));
         stage.show();

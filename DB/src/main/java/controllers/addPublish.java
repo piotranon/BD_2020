@@ -60,9 +60,15 @@ public class addPublish {
             ad.setNumer_Budynku(Integer.valueOf(nrbudynku.getText()));
             ad.setWydawnictwo(wydawnictwa);
             wydawnictwa.setAdres(ad);
+
+
+
+            if(!db.session.getTransaction().isActive())
+                db.session.beginTransaction();
             db.session.save(ad);
             db.session.saveOrUpdate(wydawnictwa);
             db.session.getTransaction().commit();
+
             ((Stage)clearing.getScene().getWindow()).close();
         }else
         {

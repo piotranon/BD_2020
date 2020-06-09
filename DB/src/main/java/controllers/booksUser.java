@@ -22,6 +22,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -119,52 +121,53 @@ public class booksUser {
     }
 
     @FXML
-    void login(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/login.fxml"));
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        login controller = (login) loader.getController();
-        Stage stage = new Stage();
-        stage.setTitle("BD 2020 Długosz Piotr");
-        stage.initModality(Modality.WINDOW_MODAL);
-        xOffset = 0;
-        yOffset = 0;
-        //move window easly
-
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() - xOffset);
-                stage.setY(event.getScreenY() - yOffset);
-            }
-        });
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(search.getScene().getWindow());
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
+    void login(ActionEvent event) throws IOException {
+        render.login();
+//        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/login.fxml"));
+//        Parent root = null;
+//        try {
+//            root = loader.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        login controller = (login) loader.getController();
+//        Stage stage = new Stage();
+//        stage.setTitle("BD 2020 Długosz Piotr");
+//        stage.initModality(Modality.WINDOW_MODAL);
+//        xOffset = 0;
+//        yOffset = 0;
+//        //move window easly
+//
+//        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                xOffset = event.getSceneX();
+//                yOffset = event.getSceneY();
+//            }
+//        });
+//
+//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                stage.setX(event.getScreenX() - xOffset);
+//                stage.setY(event.getScreenY() - yOffset);
+//            }
+//        });
+//        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.initOwner(search.getScene().getWindow());
+//        stage.setScene(new Scene(root));
+//        stage.showAndWait();
     }
 
-    @FXML
-    void logout(ActionEvent event) {
+//    @FXML
+//    void logout(ActionEvent event) throws IOException {
+//        render.books();
+//    }
 
-    }
-
-    @FXML
-    void menu(ActionEvent event) {
-
-    }
+//    @FXML
+//    void menu(ActionEvent event) throws IOException {
+//        render.menu();
+//    }
 
     void sortedList(List<Ksiazki> booksList) {
         ObservableList<Ksiazki> booksxml = (ObservableList<Ksiazki>) FXCollections.observableList(booksList);
@@ -197,12 +200,26 @@ public class booksUser {
         sortedData.comparatorProperty().bind((ObservableValue<? extends Comparator<? super Ksiazki>>) tableview.comparatorProperty());
 
         tableview.setItems(sortedData);
+        tableview.refresh();
     }
 
+//    private SessionFactory sessionFactory;
+//    private Session session;
+
     public void reload() {
+        if(!db.session.getTransaction().isActive())
+            db.session.beginTransaction();
         localBooksList = db.loadAllData(Ksiazki.class);
+        db.session.getTransaction().commit();
+
         search.setText("");
         sortedList(localBooksList);
+    }
+
+    @FXML
+    public void bookRent()
+    {
+
     }
 
     @FXML

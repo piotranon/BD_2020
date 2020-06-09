@@ -4,6 +4,8 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 
 public class App extends Application {
@@ -12,11 +14,15 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
+
         //polaczenie z baza
         sesja.sessionStart();
         render.stage=stage;
         render.books();
-
+        stage.setOnCloseRequest( event -> {
+            System.out.println("zamkniecie sesji");
+//            db.session.close();
+        } );
         //javafx view
 
 //        Adres adres=new Adres();

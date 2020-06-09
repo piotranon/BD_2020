@@ -35,6 +35,14 @@ public class Wypozyczenia {
 
     public Wypozyczenia() {
     }
+    public Wypozyczenia(Wypozyczenia w) {
+        id_wypozyczenia=w.id_wypozyczenia;
+        ksiazka=w.ksiazka;
+        pracownik=w.pracownik;
+        klient=w.klient;
+        data_wypozyczenia=w.data_wypozyczenia;
+        data_zwrotu=w.data_zwrotu;
+    }
 
     public int getId_wypozyczenia() {
         return id_wypozyczenia;
@@ -84,13 +92,27 @@ public class Wypozyczenia {
         this.data_zwrotu = data_zwrotu;
     }
 
+    public String getTytul()
+    {
+        return ksiazka.getTytul();
+    }
+
+    public String getImie()
+    {
+        return klient.getImie();
+    }
+
+    public String getNazwisko()
+    {
+        return klient.getNazwisko();
+    }
+
     @Override
     public String toString() {
         return "Wypozyczenia{" +
                 "id_wypozyczenia=" + id_wypozyczenia +
                 ", ksiazka=" + ksiazka +
                 ", pracownik=" + pracownik +
-                ", klient=" + klient +
                 ", data_wypozyczenia=" + data_wypozyczenia +
                 ", data_zwrotu=" + data_zwrotu +
                 ", ksiazka=" + ksiazka +

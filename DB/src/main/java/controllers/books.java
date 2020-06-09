@@ -29,9 +29,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 public class books {
 
@@ -116,7 +118,7 @@ public class books {
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-            render.booksLogged();
+            reload();
         }else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -164,7 +166,8 @@ public class books {
         stage.setScene(new Scene(root));
         stage.showAndWait();
 //        localBooksList.add(controller.nowa);
-        render.booksLogged();
+//        tableview.getItems().clear();
+        reload();
 
     }
     @FXML
@@ -223,15 +226,22 @@ public class books {
         if(tableview.getSelectionModel().getSelectedItem()!=null)
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Look, a Confirmation Dialog");
-            alert.setContentText("Are you ok with this?");
+            alert.setTitle("Potwierdzenie usuwania");
+            alert.setHeaderText("Usuwanie książki");
+            alert.setContentText("Jesteś pewien ,że chcesz to zrobić? Nie będzie możliwości przywrócenia tego.");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 // ... user chose OK
+
+                if(!db.session.getTransaction().isActive())
+                    db.session.beginTransaction();
                 db.session.delete(tableview.getSelectionModel().getSelectedItem());
                 db.session.getTransaction().commit();
+//                db.session.delete(db.session.get(Ksiazki.class,tableview.getSelectionModel().getSelectedItem().getId_ksiazki()));
+//                db.tx.commit();
+//                db.tx.commit();
+                reload();
             }
         }else
         {
@@ -244,14 +254,68 @@ public class books {
     }
 
     @FXML
-    void bookRent(ActionEvent event) {
-
+    void menu(ActionEvent event) throws IOException {
+        render.menu();
     }
 
     @FXML
-    void returnBook(ActionEvent event)
-    {
+    void bookRent(ActionEvent event) {
+        if(tableview.getSelectionModel().getSelectedItem()!=null)
+        {
+            if(tableview.getSelectionModel().getSelectedItem().getIlosc()<=0)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Wystąpił błąd");
+                alert.setHeaderText("Błąd wypozyczenia.");
+                alert.setContentText("Nie można wypożyczyć książki której nie mamy na stanie.");
+                alert.showAndWait();
+            }else {
 
+                FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/rentBook.fxml"));
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                rentBook controller = (rentBook) loader.getController();
+                controller.book = tableview.getSelectionModel().getSelectedItem();
+                Stage stage = new Stage();
+                stage.setTitle("BD 2020 Długosz Piotr");
+                stage.initModality(Modality.WINDOW_MODAL);
+                xOffset = 0;
+                yOffset = 0;
+                //move window easly
+
+                root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        xOffset = event.getSceneX();
+                        yOffset = event.getSceneY();
+                    }
+                });
+
+                root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        stage.setX(event.getScreenX() - xOffset);
+                        stage.setY(event.getScreenY() - yOffset);
+                    }
+                });
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.initOwner(button.getScene().getWindow());
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+                reload();
+            }
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText("Dane nie poprawne.");
+            alert.setContentText("Nie wybrałeś książki z listy.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -264,12 +328,8 @@ public class books {
         render.books();
     }
 
-    @FXML
-    void reloadDataToView(ActionEvent event) {
-        reload();
-    }
-
     void sortedList(List<Ksiazki> booksList) {
+        
         ObservableList<Ksiazki> booksxml = (ObservableList<Ksiazki>) FXCollections.observableList(booksList);
         FilteredList<Ksiazki> filteredList = new FilteredList<Ksiazki>(booksxml);
 
@@ -299,14 +359,16 @@ public class books {
         SortedList<Ksiazki> sortedData = new SortedList<Ksiazki>(filteredList);
         sortedData.comparatorProperty().bind(tableview.comparatorProperty());
         tableview.setItems(sortedData);
+        tableview.refresh();
     }
 
-    private SessionFactory sessionFactory;
-    private Session session;
-
     public void reload() {
-        localBooksList.clear();
+        localBooksList.removeAll(localBooksList);
+
+        if(!db.session.getTransaction().isActive())
+            db.session.beginTransaction();
         localBooksList = db.loadAllData(Ksiazki.class);
+        db.session.getTransaction().commit();
 
         System.out.println("books:");
         for(int i=0;i<localBooksList.size();i++)

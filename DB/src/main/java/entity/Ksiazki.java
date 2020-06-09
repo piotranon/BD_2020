@@ -212,7 +212,6 @@ public class Ksiazki {
                 ", kategoria=" + kategoria +
                 ", autorzy=" + autorzy +
                 ", tags=" + tags +
-                ", wypozyczenia=" + wypozyczenia +
                 '}';
     }
 }

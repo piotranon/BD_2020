@@ -26,6 +26,14 @@ public class Klienci {
     public Klienci() {
     }
 
+    public Klienci(Klienci k) {
+        id_klienta=k.id_klienta;
+        imie=k.imie;
+        nazwisko=k.nazwisko;
+        adres=k.adres;
+        wypozyczenia=k.wypozyczenia;
+    }
+
     public int getId_klienta() {
         return id_klienta;
     }
@@ -65,6 +73,12 @@ public class Klienci {
     public void setWypozyczenia(List<Wypozyczenia> wypozyczenia) {
         this.wypozyczenia = wypozyczenia;
     }
+
+    public String getMiejscowosc(){return adres.getMiejscowosc();}
+
+    public String getUlica(){return adres.getUlica();}
+
+    public String getNrBudynku(){return  String.valueOf(adres.getNumer_Budynku());}
 
     @Override
     public String toString() {

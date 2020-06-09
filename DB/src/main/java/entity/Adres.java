@@ -22,7 +22,7 @@ public class Adres {
     private List<Pracownicy> pracownicy=new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.MERGE ,
             mappedBy = "adres"
     )
     private List<Klienci> klienci=new ArrayList<>();

@@ -45,7 +45,7 @@
             </TextField>
             <Label style="-fx-font-weight: bold;" text="Wyszukiwarka" />
             <Label style="-fx-font-weight: bold;" text="Książki" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FFD300; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Dane Książki" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#bookDetails" style="-fx-background-color: #FFD300; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Więcej informacji" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -90,8 +90,6 @@
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Button mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="68.0" style="-fx-background-color: null;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#menu" prefHeight="41.0" prefWidth="67.0" style="-fx-background-color: null;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#login" style="-fx-background-color: none;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="56.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">

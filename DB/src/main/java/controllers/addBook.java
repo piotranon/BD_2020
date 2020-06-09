@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.*;
 
 import entity.*;
@@ -14,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.result.Output;
 import org.hibernate.result.ResultSetOutput;
@@ -63,7 +66,8 @@ public class addBook {
 
     @FXML
     private Button cancel;
-
+    private SessionFactory sessionFactory;
+    private Session session;
     @FXML
     void Add(ActionEvent event) {
         boolean validData = true;
@@ -99,8 +103,9 @@ public class addBook {
         }
 
         if (validData) {
-            wydaw.setId_wydawnictwa(wydawnictwo.getSelectionModel().getSelectedItem().Value);
-            wydaw.setNazwa(wydawnictwo.getSelectionModel().getSelectedItem().Text);
+
+            wydaw=session.get(Wydawnictwa.class,wydawnictwo.getSelectionModel().getSelectedItem().Value);
+
             kat.setId_kategorii(kategoria.getSelectionModel().getSelectedItem().Value);
             kat.setNazwa(kategoria.getSelectionModel().getSelectedItem().Text);
             List<Autorzy> autorzy = new ArrayList<>();
@@ -120,14 +125,24 @@ public class addBook {
 
             nowa.setTytul(name.getText());
             nowa.setIlosc(Integer.parseInt(amount.getText()));
-            nowa.setData_wydania(java.sql.Date.valueOf(data.getValue()));
+            java.util.Date date =
+                    java.util.Date.from(data.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            nowa.setData_wydania(sqlDate);
             nowa.setWydawnictwo(wydaw);
             nowa.setKategoria(kat);
             nowa.setAutorzy(autorzy);
             nowa.setTags(tagi);
 
-            db.session.saveOrUpdate(nowa);
+//            db.sessionStart();
+
+
+//            db.session.getTransaction().commit();
+            if(!db.session.getTransaction().isActive())
+                db.session.beginTransaction();
+            db.session.save(nowa);
             db.session.getTransaction().commit();
+
             cancel(event);
 
         } else {
@@ -235,22 +250,16 @@ public class addBook {
 
     @FXML
     void removeAutor(ActionEvent event) {
-        ComboboxItem xd = autorzyLista.getItems().get(autorzyLista.getItems().size() - 1);
-        autorzyLista.getItems().remove(xd);
-        autorzyLista.getItems().add(autorzyListaAktualne.getSelectionModel().getSelectedItem());
-        autorzyLista.getItems().add(xd);
-
-        autorzyListaAktualne.getItems().remove(autorzyListaAktualne.getSelectionModel().getSelectedItem());
+        ComboboxItem d=autorzyListaAktualne.getSelectionModel().getSelectedItem();
+        autorzyLista.getItems().add(d);
+        autorzyListaAktualne.getItems().remove(d);
     }
 
     @FXML
     void removeTag(ActionEvent event) {
-        ComboboxItem xd = tagiLista.getItems().get(tagiLista.getItems().size() - 1);
-        tagiLista.getItems().remove(xd);
-        tagiLista.getItems().add(tagiListaAktualne.getSelectionModel().getSelectedItem());
-        tagiLista.getItems().add(xd);
-
-        tagiListaAktualne.getItems().remove(tagiListaAktualne.getSelectionModel().getSelectedItem());
+        ComboboxItem d=tagiListaAktualne.getSelectionModel().getSelectedItem();
+        tagiLista.getItems().add(d);
+        tagiListaAktualne.getItems().remove(d);
     }
 
     @FXML
@@ -260,7 +269,6 @@ public class addBook {
 
     void renderTags() {
         tagiLista.getItems().clear();
-
         ProcedureCall call = db.session.createStoredProcedureCall("GETTAGI");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();

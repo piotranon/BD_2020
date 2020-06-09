@@ -28,13 +28,18 @@ public class menu {
     }
 
     @FXML
-    void wyloguj(ActionEvent event) throws IOException {
-        render.login();
+    void logout(ActionEvent event) throws IOException {
+        render.books();
     }
 
     @FXML
-    void zwrot(ActionEvent event) {
+    void klienci(ActionEvent event) {
 
+    }
+
+    @FXML
+    void zwrot(ActionEvent event) throws IOException {
+        render.returnBook();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

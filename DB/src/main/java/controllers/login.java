@@ -57,8 +57,8 @@ public class login {
 
 
     @FXML
-    void close(ActionEvent event) {
-        ((Stage)close.getScene().getWindow()).close();
+    void close(ActionEvent event) throws IOException {
+        render.books();
     }
 
     @FXML
@@ -143,7 +143,7 @@ public class login {
 
                 if (output1.isResultSet()) {
                     List<Object[]> resultData1 = ((ResultSetOutput) output1).getResultList();
-                    if (!resultData.isEmpty()) {
+                    if (!resultData1.isEmpty()) {
                         adres.setId_adresu(((BigDecimal) resultData1.get(0)[0]).intValue());
                         adres.setMiejscowosc((String) resultData1.get(0)[1]);
                         adres.setKod_Pocztowy((String) resultData1.get(0)[2]);
@@ -154,8 +154,7 @@ public class login {
                 zalogowany.setAdres(adres);
                 System.out.println("ZALOGOWANO: " + zalogowany.toString());
 
-                render.booksLogged();
-                ((Stage)error.getScene().getWindow()).close();
+                render.menu();
             } else {
                 error.setText("NIE POPRAWNE DANE LOGOWANIA");
                 System.out.println("Błąd logowania");

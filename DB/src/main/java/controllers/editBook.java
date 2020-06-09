@@ -16,6 +16,7 @@ package controllers;
         import javax.persistence.ParameterMode;
         import java.io.IOException;
         import java.math.BigDecimal;
+        import java.time.Instant;
         import java.time.ZoneId;
         import java.util.ArrayList;
         import java.util.List;
@@ -178,14 +179,23 @@ public class editBook {
 
             edited.setTytul(name.getText());
             edited.setIlosc(Integer.parseInt(amount.getText()));
-            edited.setData_wydania(java.sql.Date.valueOf(data.getValue()));
+
+            java.util.Date date =
+                    java.util.Date.from(data.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+            edited.setData_wydania(sqlDate);
             edited.setWydawnictwo(wydaw);
             edited.setKategoria(kat);
             edited.setAutorzy(autorzy);
             edited.setTags(tagi);
 
+
+            if(!db.session.getTransaction().isActive())
+                db.session.beginTransaction();
             db.session.saveOrUpdate(edited);
             db.session.getTransaction().commit();
+
             cancel(event);
 
         } else {
@@ -382,8 +392,9 @@ public class editBook {
         System.out.println("edytowanie: "+edited.toString());
         name.setText(edited.getTytul());
         amount.setText(String.valueOf(edited.getIlosc()));
-        data.setValue(((edited.getData_wydania()).toInstant()).atZone(ZoneId.systemDefault()).toLocalDate());
-
+        data.setValue(Instant.ofEpochMilli(edited.getData_wydania().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
         renderTags();
         renderAuthors();
         renderCategory();

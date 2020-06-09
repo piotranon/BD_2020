@@ -49,7 +49,7 @@ public class addCategory {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Błąd");
                 alert.setHeaderText("Błąd podczas dodawania");
-                alert.setContentText("Wystąpił błąd podczas dodawania.");
+                alert.setContentText(e.getMessage()+"\n"+e.getStackTrace());
                 alert.showAndWait();
                 close(event);
             }

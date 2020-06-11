@@ -64,19 +64,28 @@ public class returnBook {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK){
                     // ... user chose OK
+                    System.out.println("1;");
+
+                    java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                    tableview.getSelectionModel().getSelectedItem().setData_zwrotu(date);
+
+                    Ksiazki k=tableview.getSelectionModel().getSelectedItem().getKsiazka();
+                    k.setIlosc(k.getIlosc()+1);
+                    k.getWypozyczenia().add(tableview.getSelectionModel().getSelectedItem());
 
                     if(!db.session.getTransaction().isActive())
                         db.session.beginTransaction();
-                    Ksiazki k=tableview.getSelectionModel().getSelectedItem().getKsiazka();
-                    k.setIlosc(k.getIlosc()+1);
                     db.session.saveOrUpdate(k);
-                    java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                    tableview.getSelectionModel().getSelectedItem().setData_zwrotu(date);
+                    db.session.getTransaction().commit();
+
+                    if(!db.session.getTransaction().isActive())
+                        db.session.beginTransaction();
                     db.session.saveOrUpdate(tableview.getSelectionModel().getSelectedItem());
                     db.session.getTransaction().commit();
+
 //                db.session.delete(db.session.get(Ksiazki.class,tableview.getSelectionModel().getSelectedItem().getId_ksiazki()));
 //                db.tx.commit();
-//                db.tx.commit();
+                    System.out.println("2;");
                     reload();
                 }
             }else

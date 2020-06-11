@@ -66,4 +66,14 @@ public class render {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public static void customers() throws IOException {
+        FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/customers.fxml"));
+        Parent root = null;
+        root = loader.load();
+        customers controller = (customers) loader.getController();
+        stage.setTitle("BD 2020 Długosz Piotr");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

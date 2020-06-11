@@ -54,10 +54,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Button mnemonicParsing="false" onAction="#reloadDataToView" style="-fx-background-color: #7395AE; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Odśwież dane" GridPane.rowIndex="13">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
             <Label style="-fx-font-weight: bold;" text="Książki" GridPane.rowIndex="3" />
             <Label style="-fx-font-weight: bold;" text="Wypożyczenie" GridPane.rowIndex="9" />
             <Button mnemonicParsing="false" onAction="#bookRent" style="-fx-background-color: #00BFFF; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-style: solid;" text="Wypożycz Książkę" GridPane.rowIndex="10">

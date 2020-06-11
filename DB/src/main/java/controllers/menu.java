@@ -33,8 +33,8 @@ public class menu {
     }
 
     @FXML
-    void klienci(ActionEvent event) {
-
+    void klienci(ActionEvent event) throws IOException {
+        render.customers();
     }
 
     @FXML

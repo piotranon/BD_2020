@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Autorzy {
     @Id
-    @GeneratedValue (generator = "autorzy_increment")
+    @GeneratedValue (generator = "AUTORZY_SEQ")
     private int id_autora;
 
     private String imie;

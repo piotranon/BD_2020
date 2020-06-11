@@ -73,7 +73,7 @@ public class books {
     @FXML
     private Button button;
 
-    private List<Ksiazki> localBooksList = new ArrayList<>();
+    public List<Ksiazki> localBooksList = new ArrayList<>();
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -350,6 +350,7 @@ public class books {
                     return true;
                 else if (c.getTagsHash().toLowerCase().contains(search.getText().toLowerCase()))
                     return true;
+                
                 return false;
             }
         };
@@ -363,12 +364,12 @@ public class books {
     }
 
     public void reload() {
-        localBooksList.removeAll(localBooksList);
+        localBooksList.clear();
 
         if(!db.session.getTransaction().isActive())
             db.session.beginTransaction();
         localBooksList = db.loadAllData(Ksiazki.class);
-        db.session.getTransaction().commit();
+//        db.session.getTransaction().commit();
 
         System.out.println("books:");
         for(int i=0;i<localBooksList.size();i++)

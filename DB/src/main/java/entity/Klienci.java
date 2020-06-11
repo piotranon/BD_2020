@@ -8,17 +8,17 @@ import java.util.List;
 @Entity
 public class Klienci {
     @Id
-    @GeneratedValue (generator = "klienci_increment")
+    @GeneratedValue (generator = "KLIENCI_SEQ")
     private int id_klienta;
     private String imie;
     private String nazwisko;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_adresu",nullable = false)
     private Adres adres;
 
     @OneToMany(
-            cascade = CascadeType.MERGE,
+            cascade = CascadeType.ALL,
             mappedBy = "klient"
     )
     private List<Wypozyczenia> wypozyczenia=new ArrayList<>();

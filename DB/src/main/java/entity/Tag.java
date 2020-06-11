@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Tag {
     @Id
-    @GeneratedValue (generator = "tag_increment")
+    @GeneratedValue (generator = "TAG_SEQ")
     private int id_tagu;
     private String nazwa;
 

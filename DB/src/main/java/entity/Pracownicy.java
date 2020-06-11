@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Pracownicy {
     @Id
-    @GeneratedValue (generator = "pracownicy_increment")
+    @GeneratedValue (generator = "PRACOWNICY_SEQ")
     private int id_pracownika;
     private String imie;
     private String nazwisko;

@@ -148,21 +148,23 @@ public class customers {
     void moreInfo(ActionEvent event) {
         if(tableview.getSelectionModel().getSelectedItem()!=null)
         {
-            FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/editBook.fxml"));
+            FXMLLoader loader = new FXMLLoader(render.class.getClassLoader().getClass().getResource("/scenes/customerInfo.fxml"));
             Parent root = null;
             try {
                 root = loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            editBook controller = (editBook) loader.getController();
+            customerInfo controller = (customerInfo) loader.getController();
+            controller.klient=tableview.getSelectionModel().getSelectedItem();
+            controller.reload();
             Stage stage = new Stage();
             stage.setTitle("BD 2020 Długosz Piotr");
             stage.initModality(Modality.WINDOW_MODAL);
             xOffset = 0;
             yOffset = 0;
             //move window easly
-            controller.info=tableview.getSelectionModel().getSelectedItem();
+//            controller.info=tableview.getSelectionModel().getSelectedItem();
             controller.reload();
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
                 @Override
@@ -180,7 +182,7 @@ public class customers {
                 }
             });
             stage.initStyle(StageStyle.UNDECORATED);
-            stage.initOwner(button.getScene().getWindow());
+//            stage.initOwner(button.getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -268,6 +270,7 @@ public class customers {
         sortedData.comparatorProperty().bind(tableview.comparatorProperty());
 
         tableview.setItems(sortedData);
+        tableview.refresh();
     }
 
     public void reload() {

@@ -15,7 +15,7 @@ import java.util.Date;
 @Entity
 public class Wypozyczenia {
     @Id
-    @GeneratedValue (generator = "wypozyczenia_increment")
+    @GeneratedValue (generator = "WYPOZYCZENIA_SEQ")
     private int id_wypozyczenia;
 
     @ManyToOne
@@ -111,11 +111,10 @@ public class Wypozyczenia {
     public String toString() {
         return "Wypozyczenia{" +
                 "id_wypozyczenia=" + id_wypozyczenia +
-                ", ksiazka=" + ksiazka +
+                ", ksiazka.tytul=" + ksiazka.getTytul() +
                 ", pracownik=" + pracownik +
                 ", data_wypozyczenia=" + data_wypozyczenia +
                 ", data_zwrotu=" + data_zwrotu +
-                ", ksiazka=" + ksiazka +
                 '}';
     }
 }

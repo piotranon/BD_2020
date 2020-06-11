@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 public class Ksiazki {
     @Id
-    @GeneratedValue (generator = "ksiazki_increment")
+    @GeneratedValue (generator = "KSIAZKI_SEQ")
     private int id_ksiazki;
     private String tytul;
     private Date data_wydania;
@@ -203,15 +203,17 @@ public class Ksiazki {
 
     @Override
     public String toString() {
-        return "Ksiazki{" +
-                "id_ksiazki=" + id_ksiazki +
-                ", tytul='" + tytul + '\'' +
-                ", data_wydania=" + data_wydania +
-                ", ilosc=" + ilosc +
-                ", wydawnictwo=" + wydawnictwo +
-                ", kategoria=" + kategoria +
-                ", autorzy=" + autorzy +
-                ", tags=" + tags +
-                '}';
+        return "Ksiazka{" +
+                "\n   id_ksiazki=" + id_ksiazki +
+                ", \n   tytul='" + tytul + '\'' +
+                ", \n   data_wydania=" + data_wydania +
+                ", \n   ilosc=" + ilosc +
+                ", \n   wydawnictwo=" + wydawnictwo +
+                ", \n   kategoria=" + kategoria +
+                ", \n   autorzy=" + autorzy +
+                ", \n   tags=" + tags +
+                ", \n   wypozyczenia=" + wypozyczenia +
+                ", \n   popularnosc=" + this.getPopularnosc() +
+                "\n}";
     }
 }

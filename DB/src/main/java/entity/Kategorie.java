@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Kategorie {
     @Id
-    @GeneratedValue (generator = "kategorie_increment")
+    @GeneratedValue (generator = "KATEGORIE_SEQ")
     private int id_kategorii;
     private String nazwa;
 

@@ -104,7 +104,43 @@ public class addBook {
 
         if (validData) {
 
-            wydaw=session.get(Wydawnictwa.class,wydawnictwo.getSelectionModel().getSelectedItem().Value);
+            wydaw.setId_wydawnictwa(wydawnictwo.getSelectionModel().getSelectedItem().Value);
+            wydaw.setNazwa(wydawnictwo.getSelectionModel().getSelectedItem().Text);
+//            wydaw=session.get(Wydawnictwa.class, wydawnictwo.getSelectionModel().getSelectedItem().Value);
+
+            if(!db.session.getTransaction().isActive())
+                db.session.beginTransaction();
+
+            ProcedureCall call = db.session.createStoredProcedureCall("GETWYDAWNICTWO");
+            call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(wydaw.getId_wydawnictwa());
+            call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
+
+            Output output = call.getOutputs().getCurrent();
+
+            if (output.isResultSet()) {
+                List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
+                if (!resultData.isEmpty()) {
+                    ProcedureCall call1 = db.session.createStoredProcedureCall("GETADRES");
+                    call1.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(((BigDecimal) resultData.get(0)[2]).intValue());
+                    call1.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
+
+                    Output output1 = call1.getOutputs().getCurrent();
+                    Adres adres=new Adres();
+                    if (output1.isResultSet()) {
+                        List<Object[]> resultData1 = ((ResultSetOutput) output1).getResultList();
+                        if (!resultData1.isEmpty()) {
+                            adres.setId_adresu(((BigDecimal) resultData1.get(0)[0]).intValue());
+                            adres.setMiejscowosc((String) resultData1.get(0)[1]);
+                            adres.setKod_Pocztowy((String) resultData1.get(0)[2]);
+                            adres.setUlica((String) resultData1.get(0)[3]);
+                            adres.setNumer_Budynku(((BigDecimal) resultData1.get(0)[4]).intValue());
+                        }
+                    }
+                    wydaw.setAdres(adres);
+                }
+            }
+
+            System.out.println("idw:"+wydaw.toString());
 
             kat.setId_kategorii(kategoria.getSelectionModel().getSelectedItem().Value);
             kat.setNazwa(kategoria.getSelectionModel().getSelectedItem().Text);
@@ -138,6 +174,7 @@ public class addBook {
 
 
 //            db.session.getTransaction().commit();
+
             if(!db.session.getTransaction().isActive())
                 db.session.beginTransaction();
             db.session.save(nowa);

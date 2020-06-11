@@ -1,5 +1,6 @@
 package controllers;
 
+import entity.Ksiazki;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -28,6 +29,8 @@ public class addTag {
         if(!validData)
             return;
 
+        if(!db.session.getTransaction().isActive())
+            db.session.beginTransaction();
         ProcedureCall call = db.session.createStoredProcedureCall("ADDTAG");
         call.registerParameter(1, String.class, ParameterMode.IN);
         call.setParameter(1,tag.getText());
@@ -45,6 +48,8 @@ public class addTag {
             alert.showAndWait();
             close(event);
         }
+        db.session.getTransaction().commit();
+
         if(!er)
             close(event);
     }

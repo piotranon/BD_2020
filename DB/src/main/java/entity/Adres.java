@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Adres {
     @Id
-    @GeneratedValue (generator = "ADRES_INCREMENT")
+    @GeneratedValue (generator = "ADRES_SEQ")
     private int id_adresu;
     private String miejscowosc;
     private String kod_Pocztowy;

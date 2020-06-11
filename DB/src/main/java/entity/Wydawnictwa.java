@@ -8,12 +8,12 @@ import java.util.List;
 @Entity
 public class Wydawnictwa {
     @Id
-    @GeneratedValue (generator = "wydawnictwa_increment")
+    @GeneratedValue (generator = "WYDAWNICTWA_SEQ")
     private int id_wydawnictwa;
     private String nazwa;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_adresu")
+    @JoinColumn(name = "id_adresu", nullable = false)
     private Adres adres;
 
     @OneToMany(

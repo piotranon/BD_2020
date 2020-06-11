@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <LineChart prefHeight="101.0" prefWidth="600.0" title="Popularność" GridPane.columnSpan="2" GridPane.rowIndex="9">
+            <LineChart prefHeight="101.0" prefWidth="600.0" title="Popularność w ostatnim roku" GridPane.columnSpan="2" GridPane.rowIndex="9">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

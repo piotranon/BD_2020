@@ -62,24 +62,24 @@ public class editCustomer {
 
         if(validData)
         {
-            Klienci nowy=new Klienci();
-            nowy.setImie(imie.getText());
-            nowy.setNazwisko(nazwisko.getText());
-            Adres a=new Adres();
-            a.setMiejscowosc(miejscowosc.getText());
-            a.setNumer_Budynku(Integer.valueOf(nrBudynku.getText()));
-            a.setKod_Pocztowy(kodpocztowy.getText());
-            a.setUlica(ulica.getText());
-            nowy.setAdres(a);
+            klient.setId_klienta(klient.getId_klienta());
+            klient.setImie(imie.getText());
+            klient.setNazwisko(nazwisko.getText());
+
+            klient.getAdres().setId_adresu(klient.getAdres().getId_adresu());
+            klient.getAdres().setMiejscowosc(miejscowosc.getText());
+            klient.getAdres().setNumer_Budynku(Integer.valueOf(nrBudynku.getText()));
+            klient.getAdres().setKod_Pocztowy(kodpocztowy.getText());
+            klient.getAdres().setUlica(ulica.getText());
+
+//            if(!db.session.getTransaction().isActive())
+//                db.session.beginTransaction();
+//            db.session.saveOrUpdate(a);
+//            db.session.getTransaction().commit();
 
             if(!db.session.getTransaction().isActive())
                 db.session.beginTransaction();
-            db.session.saveOrUpdate(a);
-            db.session.getTransaction().commit();
-
-            if(!db.session.getTransaction().isActive())
-                db.session.beginTransaction();
-            db.session.saveOrUpdate(nowy);
+            db.session.saveOrUpdate(klient);
             db.session.getTransaction().commit();
 
             cancel(event);

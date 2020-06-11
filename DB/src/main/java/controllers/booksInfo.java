@@ -2,21 +2,30 @@ package controllers;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.sql.CallableStatement;
+import java.sql.Types;
 import java.util.List;
+import java.util.Queue;
 import java.util.ResourceBundle;
 
 import entity.Adres;
 import entity.Ksiazki;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.hibernate.procedure.ProcedureCall;
+import org.hibernate.query.Query;
 import org.hibernate.result.Output;
 import org.hibernate.result.ResultSetOutput;
 
+import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 public class booksInfo {
     @FXML
@@ -42,6 +51,9 @@ public class booksInfo {
 
     @FXML
     private Label dataWydania;
+
+    @FXML
+    private LineChart<?, ?> wykres;
 
     @FXML
     private Label autorzy;
@@ -78,6 +90,36 @@ public class booksInfo {
             sb.append(book.getAutorzy().get(i).getImie()+" "+book.getAutorzy().get(i).getNazwisko()+", ");
         sb.deleteCharAt(sb.length()-2);
         autorzy.setText(sb.toString());
+
+//        int[] popularnosc=new int[12];
+
+//        StoredProcedureQuery storedProcedureQuery=db.session.createNamedStoredProcedureQuery("wykresPopularnosci");
+//        storedProcedureQuery.registerStoredProcedureParameter(1,int[].class,ParameterMode.OUT);
+//        storedProcedureQuery.registerStoredProcedureParameter(2,int.class,ParameterMode.IN);
+//        storedProcedureQuery.setParameter(2,book.getId_ksiazki());
+//
+//        storedProcedureQuery.execute();
+
+//        ProcedureCall call1 = db.session.createStoredProcedureCall("GETWYPOZYCZENIADLAKSIAZKI");
+//        call1.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(book.getId_ksiazki());
+//        call1.registerParameter(2, Integer[].class, ParameterMode.OUT);
+//
+//        Output output1 = call1.getOutputs().getCurrent();
+//        if (output1.isResultSet()) {
+//            List<Object[]> resultData1 = ((ResultSetOutput) output1).getResultList();
+//            if (!resultData1.isEmpty()) {
+//                for(int i=0;i<12;i++)
+//                    System.out.println(i+". "+resultData1.get(0)[i]);
+//            }
+//        }
+//
+//        StoredProcedureQuery procedureQuery = db.session
+//                .createStoredProcedureQuery("wykresPopularnosci");
+//        procedureQuery.registerStoredProcedureParameter("id_k", Integer.class, ParameterMode.IN);
+//        procedureQuery.setParameter("id_k", book.getId_ksiazki());
+//        procedureQuery.execute();
+//        Object singleResult = procedureQuery.getSingleResult();
+//        System.out.println("sum: " + singleResult);
     }
 
     @FXML

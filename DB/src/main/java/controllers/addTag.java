@@ -31,7 +31,7 @@ public class addTag {
 
         if(!db.session.getTransaction().isActive())
             db.session.beginTransaction();
-        ProcedureCall call = db.session.createStoredProcedureCall("ADDTAG");
+        ProcedureCall call = db.session.createStoredProcedureCall("Dodawanie.Tag");
         call.registerParameter(1, String.class, ParameterMode.IN);
         call.setParameter(1,tag.getText());
 

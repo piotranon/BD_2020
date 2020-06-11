@@ -62,14 +62,23 @@ public class addPublish {
             wydawnictwa.setAdres(ad);
 
 
+            try{
+                if(!db.session.getTransaction().isActive())
+                    db.session.beginTransaction();
+                db.session.save(ad);
+                db.session.saveOrUpdate(wydawnictwa);
+                db.session.getTransaction().commit();
 
-            if(!db.session.getTransaction().isActive())
-                db.session.beginTransaction();
-            db.session.save(ad);
-            db.session.saveOrUpdate(wydawnictwa);
-            db.session.getTransaction().commit();
-
-            ((Stage)clearing.getScene().getWindow()).close();
+                ((Stage)clearing.getScene().getWindow()).close();
+            }
+            catch (Exception e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Wystąpił błąd");
+                alert.setContentText("Nie wszystkie podane dane są poprawne");
+                alert.showAndWait();
+            }
         }else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);

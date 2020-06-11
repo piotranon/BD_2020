@@ -152,7 +152,7 @@ public class editBook {
                 Autorzy a = new Autorzy();
                 a.setId_autora(autorzyListaAktualne.getItems().get(i).Value);
 
-                ProcedureCall call = db.session.createStoredProcedureCall("GETAUTOR");
+                ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Autor");
                 call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(a.getId_autora());
                 call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 
@@ -284,7 +284,7 @@ public class editBook {
                 tagiListaAktualne.getSelectionModel().select(item);
         }
 
-        ProcedureCall call = db.session.createStoredProcedureCall("GETTAGI");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Tagi");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
 
@@ -318,7 +318,7 @@ public class editBook {
                 autorzyListaAktualne.getSelectionModel().select(item);
         }
 
-        ProcedureCall call = db.session.createStoredProcedureCall("GETAUTORZY");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Autorzy");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
 
@@ -341,7 +341,7 @@ public class editBook {
     void renderCategory() {
         kategoria.getItems().clear();
 
-        ProcedureCall call = db.session.createStoredProcedureCall("GETKATEGORIE");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Kategorie");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
 
@@ -367,7 +367,7 @@ public class editBook {
 
     void renderPublish() {
         wydawnictwo.getItems().clear();
-        ProcedureCall call = db.session.createStoredProcedureCall("GETWYDAWNICTWA");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Wydawnictwa");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
         if (output.isResultSet()) {

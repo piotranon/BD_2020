@@ -4,14 +4,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@NamedStoredProcedureQuery(
-        name = "getWypozyczenie",
-        procedureName = "getWypozyczenie",
-        parameters = {
-                @StoredProcedureParameter(mode = ParameterMode.IN,type = Integer.class),
-                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class)
-        }
-)
 @Entity
 public class Wypozyczenia {
     @Id

@@ -217,12 +217,6 @@ public class booksUser {
     }
 
     @FXML
-    public void bookRent()
-    {
-
-    }
-
-    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         name.setCellValueFactory(new PropertyValueFactory("tytul"));

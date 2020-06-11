@@ -100,7 +100,7 @@ public class Ksiazki {
         {
             if(autorzy.get(i).getImie()==null || autorzy.get(i).getNazwisko()==null)
             {
-                ProcedureCall call = db.session.createStoredProcedureCall("GETAUTOR");
+                ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Autor");
                 call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(autorzy.get(i).getId_autora());
                 call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 

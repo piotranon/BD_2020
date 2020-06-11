@@ -113,7 +113,7 @@ public class login {
 //
 
 
-        ProcedureCall call = db.session.createStoredProcedureCall("GETPRACOWNIK");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Pracownik");
         call.registerParameter(1, String.class, ParameterMode.IN).bindValue("login");
         call.registerParameter(2, String.class, ParameterMode.IN).bindValue("haslo");
         call.registerParameter(3, Class.class, ParameterMode.REF_CURSOR);
@@ -135,7 +135,7 @@ public class login {
 
                 Adres adres = new Adres();
 
-                ProcedureCall call1 = db.session.createStoredProcedureCall("GETADRES");
+                ProcedureCall call1 = db.session.createStoredProcedureCall("Pobranie.Adres");
                 call1.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(((BigDecimal) resultData.get(0)[5]).intValue());
                 call1.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 

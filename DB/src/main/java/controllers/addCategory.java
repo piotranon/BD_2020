@@ -41,7 +41,7 @@ public class addCategory {
             if(!db.session.getTransaction().isActive())
                 db.session.beginTransaction();
 
-            ProcedureCall call = db.session.createStoredProcedureCall("ADDKATEGORIA");
+            ProcedureCall call = db.session.createStoredProcedureCall("Dodawanie.Kategoria");
             call.registerParameter(1, String.class, ParameterMode.IN);
             call.setParameter(1,category.getText());
             boolean er=false;

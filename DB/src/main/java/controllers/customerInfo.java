@@ -88,6 +88,9 @@ public class customerInfo {
             else
                 listaDoZwrotu.add(w);
         }
+        System.out.println("wypozyczone: "+listaWypozyczonych.toString());
+        System.out.println("do zwrotu: "+listaDoZwrotu.toString());
+
         tableview.setItems((ObservableList<Wypozyczenia>) FXCollections.observableList(listaDoZwrotu));
         tableview2.setItems((ObservableList<Wypozyczenia>) FXCollections.observableList(listaWypozyczonych));
         tableview.refresh();

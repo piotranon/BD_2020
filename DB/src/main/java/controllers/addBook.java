@@ -111,7 +111,7 @@ public class addBook {
             if(!db.session.getTransaction().isActive())
                 db.session.beginTransaction();
 
-            ProcedureCall call = db.session.createStoredProcedureCall("GETWYDAWNICTWO");
+            ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Wydawnictwo");
             call.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(wydaw.getId_wydawnictwa());
             call.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 
@@ -120,7 +120,7 @@ public class addBook {
             if (output.isResultSet()) {
                 List<Object[]> resultData = ((ResultSetOutput) output).getResultList();
                 if (!resultData.isEmpty()) {
-                    ProcedureCall call1 = db.session.createStoredProcedureCall("GETADRES");
+                    ProcedureCall call1 = db.session.createStoredProcedureCall("Pobranie.Adres");
                     call1.registerParameter(1, Integer.class, ParameterMode.IN).bindValue(((BigDecimal) resultData.get(0)[2]).intValue());
                     call1.registerParameter(2, Class.class, ParameterMode.REF_CURSOR);
 
@@ -306,7 +306,7 @@ public class addBook {
 
     void renderTags() {
         tagiLista.getItems().clear();
-        ProcedureCall call = db.session.createStoredProcedureCall("GETTAGI");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Tagi");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
         if (output.isResultSet()) {
@@ -324,7 +324,7 @@ public class addBook {
 
     void renderAuthors() {
         autorzyLista.getItems().clear();
-        ProcedureCall call = db.session.createStoredProcedureCall("GETAUTORZY");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Autorzy");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
         if (output.isResultSet()) {
@@ -342,7 +342,7 @@ public class addBook {
 
     void renderCategory() {
         kategoria.getItems().clear();
-        ProcedureCall call = db.session.createStoredProcedureCall("GETKATEGORIE");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Kategorie");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
         if (output.isResultSet()) {
@@ -360,7 +360,7 @@ public class addBook {
 
     void renderPublish() {
         wydawnictwo.getItems().clear();
-        ProcedureCall call = db.session.createStoredProcedureCall("GETWYDAWNICTWA");
+        ProcedureCall call = db.session.createStoredProcedureCall("Pobranie.Wydawnictwa");
         call.registerParameter(1, Class.class, ParameterMode.REF_CURSOR);
         Output output = call.getOutputs().getCurrent();
         if (output.isResultSet()) {

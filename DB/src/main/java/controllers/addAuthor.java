@@ -39,7 +39,7 @@ public class addAuthor {
             validData = false;
         if(validData)
         {
-            ProcedureCall call = db.session.createStoredProcedureCall("ADDAUTOR");
+            ProcedureCall call = db.session.createStoredProcedureCall("Dodawanie.Autor");
             call.registerParameter(1, String.class, ParameterMode.IN);
             call.setParameter(1,name.getText());
             call.registerParameter(2,String.class,ParameterMode.IN);

@@ -14,6 +14,7 @@ Każdy pracownik, klient może uczestniczyć w wielu wypożyczeniach.
 Każda książka może zostać wypożyczona wiele razy.  
 Każda książka posiada jedno wydawnictwo, kategorię.  
 Każda książka może zawierać wiele autorów, tagów.  
+#### [Dokumentacja Projektu](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Piotr%20D%C5%82ugosz%20Dokumentacja.docx)
 #### Schemat ERD
 
 ![erd-diagram](./erd.png)

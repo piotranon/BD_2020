@@ -1,11 +1,104 @@
 ## SQL BAZY DANYCH
 ### SPIS
-   1. [Paczka pobranie]()
-   1. [Paczka dodawanie]()
-   1. [Trigery]()
-   1. [Sekwencje]()
-   1. [Klasa]()
-   1. [Funkcje]()
+   1. [Tabele](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#tabele)
+   1. [Paczka pobranie](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#paczka-pobranie---zawiera-procedury-pobieraj%C4%85ce)
+   1. [Paczka dodawanie](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#paczka-dodanie)
+   1. [Trigery](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#trigery)
+   1. [Sekwencje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#sekwencje)
+   1. [Klasa](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#klasa)
+   1. [Funkcje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#funkcje)
+### Tabele
+```sql
+CREATE TABLE pracownicy (
+        id_pracownika int PRIMARY KEY,
+        imie varchar(255),
+        nazwisko varchar(255),
+        pesel varchar(255),
+        data_urodzenia date,
+        id_adresu int,
+        login varchar(255),
+        haslo varchar(255),
+        CONSTRAINT unique_pesel UNIQUE (pesel,login)
+);
+CREATE TABLE klienci (
+        id_klienta int PRIMARY KEY,
+        imie varchar(255),
+        nazwisko varchar(255),
+        id_adresu int
+);
+CREATE TABLE adres (
+        id_adresu int PRIMARY KEY,
+        miejscowosc varchar(255),
+        kod_pocztowy varchar(255),
+        ulica varchar(255),
+        numer_budynku int
+);
+CREATE TABLE ksiazki (
+        id_ksiazki int PRIMARY KEY,
+        tytul varchar(255),
+        data_wydania date,
+        ilosc int,
+        id_wydawnictwa int,
+        id_kategorii int
+);
+CREATE TABLE ksiazki_tag (
+        id_ksiazki int,
+        id_tagu int
+);
+CREATE TABLE tag (
+        id_tagu int PRIMARY KEY,
+        nazwa varchar(255),
+        CONSTRAINT unique_tag UNIQUE (nazwa)
+);
+CREATE TABLE wydawnictwa (
+        id_wydawnictwa int PRIMARY KEY,
+        nazwa varchar(255),
+        id_adresu int,
+        CONSTRAINT unique_wydawnictwo UNIQUE (nazwa)
+);
+CREATE TABLE autorzy (
+        id_autora int PRIMARY KEY,
+        imie varchar(255),
+        nazwisko varchar(255)
+);
+CREATE TABLE autorzy_ksiazki (
+        id_autora int,
+        id_ksiazki int
+);
+CREATE TABLE kategorie (
+        id_kategorii int PRIMARY KEY,
+        nazwa varchar(255),
+        CONSTRAINT unique_kategoria UNIQUE (nazwa)
+);
+CREATE TABLE wypozyczenia (
+        id_wypozyczenia int PRIMARY KEY,
+        id_ksiazki int,
+        id_pracownika int,
+        id_klienta int,
+        data_wypozyczenia date,
+        data_zwrotu date
+);
+ALTER TABLE pracownicy ADD CONSTRAINT pracownik_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
+    
+ALTER TABLE klienci ADD CONSTRAINT klient_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
+    
+ALTER TABLE wydawnictwa ADD CONSTRAINT wydawnictwo_adres FOREIGN KEY (id_adresu) REFERENCES adres (id_adresu);
+    
+ALTER TABLE wypozyczenia ADD CONSTRAINT wypozyczenia_pracownik FOREIGN KEY (id_pracownika) REFERENCES pracownicy (id_pracownika);
+ALTER TABLE wypozyczenia ADD CONSTRAINT wypozyczenia_klient FOREIGN KEY (id_klienta) REFERENCES klienci (id_klienta);
+ALTER TABLE wypozyczenia ADD CONSTRAINT wypozyczenia_ksiazka FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
+    
+ALTER TABLE ksiazki ADD CONSTRAINT ksiazki_wypozyczenia FOREIGN KEY (id_ksiazki) REFERENCES wypozyczenia (id_ksiazki);
+ALTER TABLE ksiazki ADD CONSTRAINT ksiazka_wydawnictwo FOREIGN KEY (id_wydawnictwa) REFERENCES wydawnictwa (id_wydawnictwa);
+ALTER TABLE ksiazki ADD CONSTRAINT ksiazka_kategoria FOREIGN KEY (id_kategorii) REFERENCES kategorie (id_kategorii);
+    
+ALTER TABLE ksiazki_tag ADD CONSTRAINT tag_ksiazka FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
+ALTER TABLE ksiazki_tag ADD CONSTRAINT ksiazka_tag2 FOREIGN KEY (id_tagu) REFERENCES tag (id_tagu);
+    
+ALTER TABLE autorzy_ksiazki ADD CONSTRAINT autorzy_ksiazka FOREIGN KEY (id_autora) REFERENCES autorzy (id_autora);
+ALTER TABLE autorzy_ksiazki ADD CONSTRAINT ksiazka_autorzy FOREIGN KEY (id_ksiazki) REFERENCES ksiazki (id_ksiazki);
+```
+   
 ### Paczka pobranie - zawiera procedury pobierające 
 ```sql
 create or replace NONEDITIONABLE package pobranie

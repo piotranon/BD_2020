@@ -70,18 +70,26 @@ public class addCustomer {
             a.setKod_Pocztowy(kodpocztowy.getText());
             a.setUlica(ulica.getText());
             nowy.setAdres(a);
+            try {
+                if (!db.session.getTransaction().isActive())
+                    db.session.beginTransaction();
+                db.session.saveOrUpdate(a);
+                db.session.getTransaction().commit();
 
-            if(!db.session.getTransaction().isActive())
-                db.session.beginTransaction();
-            db.session.saveOrUpdate(a);
-            db.session.getTransaction().commit();
+                if (!db.session.getTransaction().isActive())
+                    db.session.beginTransaction();
+                db.session.saveOrUpdate(nowy);
+                db.session.getTransaction().commit();
 
-            if(!db.session.getTransaction().isActive())
-                db.session.beginTransaction();
-            db.session.saveOrUpdate(nowy);
-            db.session.getTransaction().commit();
-
-            cancel(event);
+                cancel(event);
+            }catch (Exception e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Wystąpił błąd");
+                alert.setContentText("Nie wszystkie podane dane są poprawne");
+                alert.showAndWait();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

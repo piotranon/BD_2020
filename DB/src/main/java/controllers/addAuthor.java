@@ -33,12 +33,12 @@ public class addAuthor {
             validData=false;
         if(surname.getText().isEmpty())
             validData=false;
+        if(validData)
+        {
         if(Character.getType(name.getText().charAt(0))!=Character.UPPERCASE_LETTER)
             validData = false;
         if(Character.getType(surname.getText().charAt(0))!=Character.UPPERCASE_LETTER)
             validData = false;
-        if(validData)
-        {
             ProcedureCall call = db.session.createStoredProcedureCall("Dodawanie.Autor");
             call.registerParameter(1, String.class, ParameterMode.IN);
             call.setParameter(1,name.getText());

@@ -174,14 +174,21 @@ public class addBook {
 
 
 //            db.session.getTransaction().commit();
+            try {
+                if (!db.session.getTransaction().isActive())
+                    db.session.beginTransaction();
+                db.session.save(nowa);
+                db.session.getTransaction().commit();
 
-            if(!db.session.getTransaction().isActive())
-                db.session.beginTransaction();
-            db.session.save(nowa);
-            db.session.getTransaction().commit();
-
-            cancel(event);
-
+                cancel(event);
+            }catch (Exception e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setHeaderText("Wystąpił błąd");
+                alert.setContentText("Nie wszystkie podane dane są poprawne");
+                alert.showAndWait();
+            }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

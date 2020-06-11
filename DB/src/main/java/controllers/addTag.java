@@ -21,7 +21,9 @@ public class addTag {
 
     @FXML
     void add(ActionEvent event) {
+        boolean er=false;
         boolean validData = true;
+        try {
 
         if(tag.getText().isEmpty())
             validData = false;
@@ -35,12 +37,11 @@ public class addTag {
         call.registerParameter(1, String.class, ParameterMode.IN);
         call.setParameter(1,tag.getText());
 
-        boolean er=false;
-        try {
+
+
             call.executeUpdate();
         }catch (Exception e)
         {
-            er=true;
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Błąd");
             alert.setHeaderText("Błąd podczas dodawania");

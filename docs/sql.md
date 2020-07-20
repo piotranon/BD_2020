@@ -9,7 +9,7 @@
    1. [Sekwencje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#sekwencje)
    1. [Klasa](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#klasa)
    1. [Funkcje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#funkcje)
-   1. [Wyeksportowana baza danych]((https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/export.sql)
+   1. [Wyeksportowana baza danych](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/export.sql)
    
 ### Relacje
 Każdy pracownik, klient posiada jeden adres.   

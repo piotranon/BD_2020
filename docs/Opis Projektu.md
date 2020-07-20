@@ -1,4 +1,4 @@
-# Projekt Skończony
+
 ## Projekt bazy danych Biblioteki w PostgreSQL
 
 #### Autor

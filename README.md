@@ -28,7 +28,7 @@ Stworzenie w pełni funkcjonalnego niezależnego systemu, który mógłby zosta�
 #### Technologie
 Do stworzenia aplikacji zostały użyte technologie takie jak:
 1. [JavaFx](https://openjfx.io/)
-1. [PL/SQL](https://www.oracle.com/pl/database/technologies/appdev/plsql.html)
+1. [Hibernate](https://hibernate.org/)
 
 #### [Baza danych](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md)
 

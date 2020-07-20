@@ -2,13 +2,13 @@
 # Projekt bazy danych Biblioteki w PostgreSQL
 
 ## Spis treści
-1. [Autor]()
-1. [Opis]()
-1. [Cel projektu / Funkcjonalności]()
-1. [Technologie]()
+1. [Autor](https://github.com/piotranon/BD_2020_DlugoszPiotr#autor)
+1. [Opis](https://github.com/piotranon/BD_2020_DlugoszPiotr#opis)
+1. [Cel projektu / Funkcjonalności](https://github.com/piotranon/BD_2020_DlugoszPiotr#cel-projektu--funkcjonalno%C5%9Bci)
+1. [Technologie](https://github.com/piotranon/BD_2020_DlugoszPiotr#technologie)
 1. [Baza danych](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md) 
-1. [Zmapowane obiekty w hibernate]()
-1. [Uruchomienie]()
+1. [Zmapowane obiekty w hibernate](https://github.com/piotranon/BD_2020_DlugoszPiotr#zmapowane-obiekty-w-hibernate)
+1. [Uruchomienie](https://github.com/piotranon/BD_2020_DlugoszPiotr#uruchomienie)
 1. [Dokumentacja Projektu](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/Piotr%20D%C5%82ugosz%20Dokumentacja.docx)
 
 #### Autor

@@ -1,5 +1,7 @@
 ## SQL BAZY DANYCH
-### SPIS
+### Spis treści
+   1. [Relacje]()
+   1. [Schemat ERD]()
    1. [Tabele](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#tabele)
    1. [Paczka pobranie](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#paczka-pobranie---zawiera-procedury-pobieraj%C4%85ce)
    1. [Paczka dodawanie](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#paczka-dodanie)
@@ -7,6 +9,20 @@
    1. [Sekwencje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#sekwencje)
    1. [Klasa](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#klasa)
    1. [Funkcje](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md#funkcje)
+   1. [Wyeksportowana baza danych]((https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/export.sql)
+   
+### Relacje
+Każdy pracownik, klient posiada jeden adres.   
+Wiele klientów, pracowników może posiadać jeden adres.  
+Każdy pracownik, klient może uczestniczyć w wielu wypożyczeniach.  
+Każda książka może zostać wypożyczona wiele razy.  
+Każda książka posiada jedno wydawnictwo, kategorię.  
+Każda książka może zawierać wiele autorów, tagów.
+
+### Schemat ERD
+
+![erd-diagram](./erd.png)
+
 ### Tabele
 ```sql
 CREATE TABLE pracownicy (

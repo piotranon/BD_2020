@@ -1,5 +1,5 @@
 
-# Projekt bazy danych Biblioteki w PostgreSQL
+# Projekt bazy danych Biblioteki w PL/SQL
 
 ## Spis treści
 1. [Autor](https://github.com/piotranon/BD_2020_DlugoszPiotr#autor)

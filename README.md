@@ -5,6 +5,7 @@
 1. [Autor](https://github.com/piotranon/BD_2020_DlugoszPiotr#autor)
 1. [Opis](https://github.com/piotranon/BD_2020_DlugoszPiotr#opis)
 1. [Cel projektu / Funkcjonalności](https://github.com/piotranon/BD_2020_DlugoszPiotr#cel-projektu--funkcjonalno%C5%9Bci)
+1. [Przedstawienie projektu](https://github.com/piotranon/BD_2020_DlugoszPiotr#przedstawienie-projektu)
 1. [Technologie](https://github.com/piotranon/BD_2020_DlugoszPiotr#technologie)
 1. [Baza danych](https://github.com/piotranon/BD_2020_DlugoszPiotr/blob/master/docs/sql.md) 
 1. [Zmapowane obiekty w hibernate](https://github.com/piotranon/BD_2020_DlugoszPiotr#zmapowane-obiekty-w-hibernate)
@@ -20,6 +21,9 @@ W projekcie stworzono Bazę danych w PL/SQL (w tym paczki z procedurami, funkcja
 
 #### Cel projektu / Funkcjonalności
 Stworzenie w pełni funkcjonalnego niezależnego systemu, który mógłby zostać wykorzystany w bibliotece. Każdy użytkownik ma dostęp do spisu książek, który może przeszukiwać, wyświetlać więcej informacji odnośnie książki. Pracownicy księgarni mogą wypożyczać książki użytkownikom, zwracać je, edytować, dodawać nowe. Sprawdzać szczegółowe dane użytkowników po zalogowaniu.
+
+#### Przedstawienie projektu [(YT)](https://www.youtube.com/watch?v=Bp3E7BYhgSk)
+[![Przedstawienie projektu](https://img.youtube.com/vi/Bp3E7BYhgSk/maxresdefault.jpg)](https://www.youtube.com/watch?v=Bp3E7BYhgSk)
 
 #### Technologie
 Do stworzenia aplikacji zostały użyte technologie takie jak:
